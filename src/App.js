@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-const style = {};
+import JustForKix from './JustForKix';
 
-export default class App extends Component {
-    render() {
-        return (
-            <div style = { style }>
-                Yay
-            </div>
-        );
-    }
+// example of a 'stateless' react component (no 'this').
+const App = () => {
+    return (
+        <MuiThemeProvider muiTheme = { getMuiTheme(lightBaseTheme) }>
+            <JustForKix />
+        </MuiThemeProvider>
+    );
 };
+
+export default App;
