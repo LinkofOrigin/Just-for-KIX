@@ -13,8 +13,8 @@ const styles = {
         width: '8vh',
         height: '8vh',
         position: 'absolute',
-        right: '1vw',
-        top: '1vw',
+        right: '1vh',
+        top: '1vh',
     },
     top: {
         width: '100%',
