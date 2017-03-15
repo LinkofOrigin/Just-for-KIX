@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { grey600, grey800 } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
 import Settings from 'material-ui/svg-icons/action/settings';
 
 import GamesList from './GamesList';
@@ -15,6 +16,10 @@ const styles = {
         position: 'absolute',
         right: '1vh',
         top: '1vh',
+    },
+    gearIcon: {
+        width: '100%',
+        height: '100%',
     },
     top: {
         width: '100%',
@@ -49,7 +54,7 @@ export default class JustForKix extends Component {
     };
 
     render() {
-        const gearStyle = Object.assign({}, styles.gear);
+        const gearStyle = Object.assign({}, styles.gearIcon);
         gearStyle.color = this.state.settingsOpen ? grey600 : grey800;
 
         const bottomElement = this.state.settingsOpen
@@ -62,10 +67,13 @@ export default class JustForKix extends Component {
                     <GamesList
                         list = { this.state.activeGames }
                     />
-                    <Settings
-                        style = { gearStyle }
+                    <IconButton
+                        style = { styles.gear }
                         onClick = { this.handleClickSettings }
-                    />
+                        iconStyle = { gearStyle }
+                    >
+                        <Settings />
+                    </IconButton>
                 </div>
                 <div style = { styles.bottom }>
                     { bottomElement }
