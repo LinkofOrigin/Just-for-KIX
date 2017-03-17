@@ -1,8 +1,13 @@
 import React, { PropTypes } from 'react';
+import { grey300 } from 'material-ui/styles/colors';
 
 const style = {
-    marginRight: '10px',
+    margin: '10px',
     display: 'inline-block',
+    backgroundColor: '#333',
+    width: '50px',
+    height: '50px',
+    textAlign: 'center',
 };
 
 const GameIcon = ({ name }) => {

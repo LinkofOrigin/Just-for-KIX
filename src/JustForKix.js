@@ -9,6 +9,7 @@ const styles = {
     bottom: {
         height: '90vh',
         background: grey600,
+        transition: 'all 0.5s ease'
     },
     gear: {
         width: '8vh',
@@ -25,6 +26,7 @@ const styles = {
         width: '100%',
         height: '10vh',
         display: 'block',
+        overflow: 'hidden',
     },
 };
 
@@ -56,13 +58,16 @@ export default class JustForKix extends Component {
     render() {
         const gearStyle = Object.assign({}, styles.gearIcon);
         gearStyle.color = this.state.settingsOpen ? grey600 : grey800;
-
-        const bottomElement = this.state.settingsOpen
-            ? <GamesList list = { this.state.inactiveGames } />
-            : <div>Game to play!</div>;
-
+        
+        const styleOne = Object.assign({}, styles.bottom);
+        styleOne.height = this.state.settingsOpen ? '0' : '90vh';
+        styleOne.overflow = this.state.settingsOpen ? 'hidden' : 'default';
+        const styleTwo = Object.assign({}, styles.bottom);
+        styleTwo.height = this.state.settingsOpen ? '90vh' : '0';
+        styleTwo.overflow = this.state.settingsOpen ? 'default' : 'hidden';
+        
         return (
-            <div>
+            <div style = {{overflow: 'hidden'}}>
                 <div style = { styles.top }>
                     <GamesList
                         list = { this.state.activeGames }
@@ -75,8 +80,11 @@ export default class JustForKix extends Component {
                         <Settings />
                     </IconButton>
                 </div>
-                <div style = { styles.bottom }>
-                    { bottomElement }
+                <div style = { styleOne }>
+                    <div>Game to play!</div>
+                </div>
+                <div style = { styleTwo }>
+                    <GamesList list = { this.state.inactiveGames } />
                 </div>
             </div>
         );
