@@ -9,7 +9,7 @@ const styles = {
     bottom: {
         height: '90vh',
         background: grey600,
-        transition: 'all 0.5s ease'
+        transition: 'all 0.5s ease',
     },
     gear: {
         width: '8vh',
@@ -58,16 +58,16 @@ export default class JustForKix extends Component {
     render() {
         const gearStyle = Object.assign({}, styles.gearIcon);
         gearStyle.color = this.state.settingsOpen ? grey600 : grey800;
-        
+
         const styleOne = Object.assign({}, styles.bottom);
         styleOne.height = this.state.settingsOpen ? '0' : '90vh';
         styleOne.overflow = this.state.settingsOpen ? 'hidden' : 'default';
         const styleTwo = Object.assign({}, styles.bottom);
         styleTwo.height = this.state.settingsOpen ? '90vh' : '0';
         styleTwo.overflow = this.state.settingsOpen ? 'default' : 'hidden';
-        
+
         return (
-            <div style = {{overflow: 'hidden'}}>
+            <div style = { { overflow: 'hidden' } }>
                 <div style = { styles.top }>
                     <GamesList
                         list = { this.state.activeGames }
@@ -84,7 +84,9 @@ export default class JustForKix extends Component {
                     <div>Game to play!</div>
                 </div>
                 <div style = { styleTwo }>
-                    <GamesList list = { this.state.inactiveGames } />
+                    <GamesList title = 'Young' list = { this.state.inactiveGames } />
+                    <GamesList title = 'Middle' list = { this.state.inactiveGames } />
+                    <GamesList title = 'Old' list = { this.state.inactiveGames } />
                 </div>
             </div>
         );

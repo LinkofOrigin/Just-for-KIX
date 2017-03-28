@@ -2,10 +2,25 @@ import React, { Component, PropTypes } from 'react';
 
 import GameIcon from './GameIcon';
 
+const style = {
+    margin: '10px 0 10px 10px',
+    fontFamily: 'Arial',
+};
+
+const h3Style = {
+    margin: '0 0 10px 0',
+};
+
 export default class GamesList extends Component {
     render() {
+        let listTitle;
+        if (this.props.title) {
+            listTitle = <h3 style = { h3Style }>{ this.props.title }</h3>;
+        }
+
         return (
-            <div>
+            <div style = { style }>
+                { listTitle }
                 {
                     this.props.list.map((game) => {
                         return (
@@ -21,4 +36,5 @@ export default class GamesList extends Component {
 
 GamesList.propTypes = {
     list: PropTypes.array.isRequired,
+    title: PropTypes.string,
 };

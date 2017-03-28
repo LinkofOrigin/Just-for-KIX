@@ -1,14 +1,19 @@
 import React, { PropTypes } from 'react';
-import { grey300 } from 'material-ui/styles/colors';
+
+let sideLength = '50px';
 
 const style = {
     margin: '10px',
     display: 'inline-block',
     backgroundColor: '#333',
-    width: '50px',
-    height: '50px',
+    color: '#fff',
+    width: sideLength,
+    height: sideLength,
     textAlign: 'center',
+    fontSize: '13px',
+    cursor: 'pointer',
 };
+
 
 const GameIcon = ({ name }) => {
     return (
