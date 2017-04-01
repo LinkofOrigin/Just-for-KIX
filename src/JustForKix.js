@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { grey600, grey800 } from 'material-ui/styles/colors';
-import IconButton from 'material-ui/IconButton';
-import Settings from 'material-ui/svg-icons/action/settings';
-
-import GamesList from './GamesList';
+import { grey600 } from 'material-ui/styles/colors';
+import Header from './Header';
+import LoggedInBottomContent from './LoggedInBottomContent';
+import LoggedOutBottomContent from './LoggedOutBottomContent';
 
 const styles = {
     bottom: {
@@ -11,27 +10,11 @@ const styles = {
         background: grey600,
         transition: 'all 0.5s ease',
     },
-    gear: {
-        width: '8vh',
-        height: '8vh',
-        position: 'absolute',
-        right: '1vh',
-        top: '1vh',
-    },
-    gearIcon: {
-        width: '100%',
-        height: '100%',
-    },
-    top: {
-        width: '100%',
-        height: '10vh',
-        display: 'block',
-        overflow: 'hidden',
-    },
 };
 
 const initialState = {
-    settingsOpen: false,
+    loggedIn: false,
+    bottomVisible: false,
     activeGames: [
         'game-one',
         'game-two',
@@ -49,44 +32,52 @@ export default class JustForKix extends Component {
         this.state = initialState;
     }
 
-    handleClickSettings = () => {
-        // similar to this.state.settingsOpen = !this.state.settingsOpen;
+    handleClickIcon = () => {
+        // similar to this.state.bottomVisible = !this.state.bottomVisible;
         // but modifying state with this method causes component to re-render.
-        this.setState({ settingsOpen: !this.state.settingsOpen });
+        this.setState({ bottomVisible: !this.state.bottomVisible });
     };
 
-    render() {
-        const gearStyle = Object.assign({}, styles.gearIcon);
-        gearStyle.color = this.state.settingsOpen ? grey600 : grey800;
+    handleLogin = () => this.setState({ loggedIn: true });
+    handleLogout = () => this.setState({ loggedIn: false });
 
+    render() {
         const styleOne = Object.assign({}, styles.bottom);
-        styleOne.height = this.state.settingsOpen ? '0' : '90vh';
-        styleOne.overflow = this.state.settingsOpen ? 'hidden' : 'default';
+        styleOne.height = this.state.bottomVisible ? '0' : '90vh';
+        styleOne.overflow = this.state.bottomVisible ? 'hidden' : 'default';
         const styleTwo = Object.assign({}, styles.bottom);
-        styleTwo.height = this.state.settingsOpen ? '90vh' : '0';
-        styleTwo.overflow = this.state.settingsOpen ? 'default' : 'hidden';
+        styleTwo.height = this.state.bottomVisible ? '90vh' : '0';
+        styleTwo.overflow = this.state.bottomVisible ? 'default' : 'hidden';
+
+        let bottomContent;
+        if (this.state.loggedIn) {
+            bottomContent = (
+                <LoggedInBottomContent
+                    inactiveGamesList = { this.state.inactiveGames }
+                    handleLogout = { this.handleLogout }
+                />
+            );
+        } else {
+            bottomContent = (
+                <LoggedOutBottomContent
+                    handleLogin = { this.handleLogin }
+                />
+            );
+        }
 
         return (
             <div style = { { overflow: 'hidden' } }>
-                <div style = { styles.top }>
-                    <GamesList
-                        list = { this.state.activeGames }
-                    />
-                    <IconButton
-                        style = { styles.gear }
-                        onClick = { this.handleClickSettings }
-                        iconStyle = { gearStyle }
-                    >
-                        <Settings />
-                    </IconButton>
-                </div>
+                <Header
+                    open = { this.state.bottomVisible }
+                    loggedIn = { this.state.loggedIn }
+                    list = { this.state.activeGames }
+                    onClickIcon = { this.handleClickIcon }
+                />
                 <div style = { styleOne }>
                     <div>Game to play!</div>
                 </div>
                 <div style = { styleTwo }>
-                    <GamesList title = 'Young' list = { this.state.inactiveGames } />
-                    <GamesList title = 'Middle' list = { this.state.inactiveGames } />
-                    <GamesList title = 'Old' list = { this.state.inactiveGames } />
+                    { bottomContent }
                 </div>
             </div>
         );
