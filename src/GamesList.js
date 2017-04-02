@@ -2,9 +2,16 @@ import React, { Component, PropTypes } from 'react';
 
 import GameIcon from './GameIcon';
 
-const style = {
-    margin: '10px 0 10px 10px',
-    fontFamily: 'Arial',
+import { gameIconSideLengthPixels } from './constants';
+const listMarginPixels = 10;
+
+const rootStyle = {
+    fontFamily: 'Roboto',
+};
+
+const defaultStyle = {
+    minHeight: gameIconSideLengthPixels + (2 * listMarginPixels),
+    margin: listMarginPixels,
 };
 
 const h3Style = {
@@ -24,6 +31,11 @@ export default class GamesList extends Component {
         this.setState({ hover: true });
     };
 
+    handleDragLeave = (event) => {
+        event.preventDefault();
+        this.setState({ hover: false });
+    };
+
     handleDrop = (event) => {
         event.preventDefault();
         const fromListName = event.dataTransfer.getData('from-list-name');
@@ -38,28 +50,34 @@ export default class GamesList extends Component {
             listTitle = <h3 style = { h3Style }>{ this.props.title }</h3>;
         }
 
+        const style = Object.assign({}, defaultStyle);
+
+        if (this.state.hover) {
+            style.backgroundColor = 'gray';
+        }
+
         return (
-            <div
-                style = { style }
-                onDragOver = { this.handleDragOver }
-                onDrop = { this.handleDrop }
-            >
+            <div style = { rootStyle }>
                 { listTitle }
-
-                {/*{ this.state.hover ? 'hover!' : 'no hover!' }*/}
-
-                {
-                    this.props.list.map((game, index) => {
-                        // 'key' prop encouraged when rendering with 'map'.
-                        return (
-                            <GameIcon
-                                key = { game + index }
-                                name = { game }
-                                fromListName = { this.props.listName }
-                            />
-                        );
-                    })
-                }
+                <div
+                    style = { style }
+                    onDragOver = { this.handleDragOver }
+                    onDragLeave = { this.handleDragLeave }
+                    onDrop = { this.handleDrop }
+                >
+                    {
+                        this.props.list.map((game, index) => {
+                            // 'key' prop encouraged when rendering with 'map'.
+                            return (
+                                <GameIcon
+                                    key = { game + index }
+                                    name = { game }
+                                    fromListName = { this.props.listName }
+                                />
+                            );
+                        })
+                    }
+                </div>
             </div>
         );
     }
