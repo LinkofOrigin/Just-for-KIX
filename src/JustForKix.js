@@ -19,10 +19,16 @@ const initialState = {
         'game-one',
         'game-two',
     ],
-    inactiveGames: [
+    inactiveGamesYoung: [
         'game-three',
         'game-four',
+    ],
+    inactiveGamesMiddle: [
         'game-five',
+        'game-six',
+    ],
+    inactiveGamesOld: [
+        'game-seven',
     ],
 };
 
@@ -41,6 +47,24 @@ export default class JustForKix extends Component {
     handleLogin = () => this.setState({ loggedIn: true });
     handleLogout = () => this.setState({ loggedIn: false });
 
+    handleAddGame = (fromListName, toListName, gameId) => {
+        const toList = this.state[toListName];
+        toList.push(gameId);
+
+        // remove from list.
+        const fromList = this.state[fromListName];
+        const index = fromList.indexOf(gameId);
+        if (index > -1) {
+            fromList.splice(index, 1);
+        }
+
+        const newState = {};
+        newState[toListName] = toList;
+        newState[fromListName] = fromList;
+
+        this.setState(newState);
+    };
+
     render() {
         const styleOne = Object.assign({}, styles.bottom);
         styleOne.height = this.state.bottomVisible ? '0' : '90vh';
@@ -53,8 +77,11 @@ export default class JustForKix extends Component {
         if (this.state.loggedIn) {
             bottomContent = (
                 <LoggedInBottomContent
-                    inactiveGamesList = { this.state.inactiveGames }
+                    inactiveGamesYoung = { this.state.inactiveGamesYoung }
+                    inactiveGamesMiddle = { this.state.inactiveGamesMiddle }
+                    inactiveGamesOld = { this.state.inactiveGamesOld }
                     handleLogout = { this.handleLogout }
+                    handleAddGame = { this.handleAddGame }
                 />
             );
         } else {
@@ -72,6 +99,7 @@ export default class JustForKix extends Component {
                     loggedIn = { this.state.loggedIn }
                     list = { this.state.activeGames }
                     onClickIcon = { this.handleClickIcon }
+                    handleAddGame = { this.handleAddGame }
                 />
                 <div style = { styleOne }>
                     <div>Game to play!</div>

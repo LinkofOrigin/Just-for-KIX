@@ -12,6 +12,26 @@ const h3Style = {
 };
 
 export default class GamesList extends Component {
+    constructor() {
+        super();
+        this.state = {
+            hover: false,
+        };
+    }
+
+    handleDragOver = (event) => {
+        event.preventDefault();
+        this.setState({ hover: true });
+    };
+
+    handleDrop = (event) => {
+        event.preventDefault();
+        const fromListName = event.dataTransfer.getData('from-list-name');
+        const gameId = event.dataTransfer.getData('game-id');
+        this.props.handleAddGame(fromListName, this.props.listName, gameId);
+        this.setState({ hover: false });
+    };
+
     render() {
         let listTitle;
         if (this.props.title) {
@@ -19,13 +39,24 @@ export default class GamesList extends Component {
         }
 
         return (
-            <div style = { style }>
+            <div
+                style = { style }
+                onDragOver = { this.handleDragOver }
+                onDrop = { this.handleDrop }
+            >
                 { listTitle }
+
+                {/*{ this.state.hover ? 'hover!' : 'no hover!' }*/}
+
                 {
-                    this.props.list.map((game) => {
+                    this.props.list.map((game, index) => {
+                        // 'key' prop encouraged when rendering with 'map'.
                         return (
-                            // 'key' prop encouraged when rendering with 'map'.
-                            <GameIcon key = { game } name = { game } />
+                            <GameIcon
+                                key = { game + index }
+                                name = { game }
+                                fromListName = { this.props.listName }
+                            />
                         );
                     })
                 }
@@ -36,5 +67,7 @@ export default class GamesList extends Component {
 
 GamesList.propTypes = {
     list: PropTypes.array.isRequired,
+    listName: PropTypes.string.isRequired,
     title: PropTypes.string,
+    handleAddGame: PropTypes.func.isRequired,
 };
