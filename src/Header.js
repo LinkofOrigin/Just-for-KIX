@@ -41,6 +41,8 @@ export default class Header extends Component {
             <div style = { styles.top }>
                 <GamesList
                     list = { this.props.list }
+                    handleAddGame = { this.props.handleAddGame }
+                    listName = 'activeGames'
                 />
                 <IconButton
                     style = { styles.gear }
@@ -60,4 +62,5 @@ Header.propTypes = {
     loggedIn: PropTypes.bool.isRequired,
     list: PropTypes.array.isRequired,
     onClickIcon: PropTypes.func.isRequired,
+    handleAddGame: PropTypes.func.isRequired,
 };

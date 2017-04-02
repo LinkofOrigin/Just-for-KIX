@@ -14,16 +14,29 @@ const style = {
     cursor: 'pointer',
 };
 
+function dragStart(event) {
+    const fromListName = event.target.getAttribute('data-tag');
+    event.dataTransfer.setData('from-list-name', fromListName);
+    event.dataTransfer.setData('game-id', event.target.id);
+    console.log();
+}
 
-const GameIcon = ({ name }) => {
+const GameIcon = ({ fromListName, name }) => {
     return (
-        <div style = { style }>
+        <div
+            id = { name }
+            draggable = 'true'
+            onDragStart = { dragStart }
+            style = { style }
+            data-tag = { fromListName }
+        >
             { name }
         </div>
     );
 };
 
 GameIcon.propTypes = {
+    fromListName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
 };
 
