@@ -13,6 +13,7 @@ const style = {
     textAlign: 'center',
     fontSize: '13px',
     cursor: 'pointer',
+    verticalAlign: 'top',
 };
 
 function dragStart(event) {
