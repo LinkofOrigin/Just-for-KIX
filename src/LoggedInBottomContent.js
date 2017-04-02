@@ -2,10 +2,16 @@ import React, { Component, PropTypes } from 'react';
 
 import GamesList from './GamesList';
 
+const styles = {
+    root: {
+        padding: '10px',
+    },
+};
+
 export default class LoggedInBottomContent extends Component {
     render() {
         return (
-            <div>
+            <div style = { styles.root }>
                 <GamesList
                     title = 'Young'
                     list = { this.props.inactiveGamesYoung }
