@@ -4,6 +4,8 @@ import Header from './Header';
 import LoggedInBottomContent from './LoggedInBottomContent';
 import LoggedOutBottomContent from './LoggedOutBottomContent';
 
+const superMarioImage = require('./img/smb.jpg');
+
 const styles = {
     bottom: {
         height: '90vh',
@@ -69,6 +71,11 @@ export default class JustForKix extends Component {
         const styleOne = Object.assign({}, styles.bottom);
         styleOne.height = this.state.bottomVisible ? '0' : '90vh';
         styleOne.overflow = this.state.bottomVisible ? 'hidden' : 'default';
+
+        styleOne.backgroundImage = `url(${superMarioImage})`;
+        styleOne.backgroundSize = 'cover';
+        styleOne.backgroundPosition = 'center bottom';
+
         const styleTwo = Object.assign({}, styles.bottom);
         styleTwo.height = this.state.bottomVisible ? '90vh' : '0';
         styleTwo.overflow = this.state.bottomVisible ? 'default' : 'hidden';
@@ -102,7 +109,7 @@ export default class JustForKix extends Component {
                     handleAddGame = { this.handleAddGame }
                 />
                 <div style = { styleOne }>
-                    <div>Game to play!</div>
+                    {/*<div>Game to play!</div>*/}
                 </div>
                 <div style = { styleTwo }>
                     { bottomContent }
