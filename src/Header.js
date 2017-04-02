@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
+
 import { grey600, grey800 } from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import Settings from 'material-ui/svg-icons/action/settings';
@@ -8,20 +10,21 @@ import GamesList from './GamesList';
 
 
 const styles = {
-    gear: {
-        width: '8vh',
-        height: '8vh',
-        position: 'absolute',
-        right: '1vh',
-        top: '1vh',
-    },
     icon: {
+        width: `${gameIconSideLengthVH}vh`,
+        height: `${gameIconSideLengthVH}vh`,
+        position: 'absolute',
+        right: `${gameIconMarginVH}vh`,
+        top: `${gameIconMarginVH}vh`,
+    },
+    defaultIconStyle: {
         width: '100%',
         height: '100%',
+        margin: 0,
     },
     top: {
         width: '100%',
-        height: '10vh',
+        height: `${(2 * gameIconMarginVH) + gameIconSideLengthVH}vh`,
         display: 'block',
         overflow: 'hidden',
     },
@@ -29,12 +32,11 @@ const styles = {
 
 export default class Header extends Component {
     render() {
-        const gearStyle = Object.assign({}, styles.icon);
-        gearStyle.color = this.props.open ? grey600 : grey800;
-
+        const iconStyle = Object.assign({}, styles.defaultIconStyle);
+        iconStyle.color = this.props.open ? grey600 : grey800;
 
         if (this.props.loggedIn && this.props.open) {
-            gearStyle.transform = 'rotate(90deg)';
+            iconStyle.transform = 'rotate(90deg)';
         }
 
         return (
@@ -45,9 +47,9 @@ export default class Header extends Component {
                     listName = 'activeGames'
                 />
                 <IconButton
-                    style = { styles.gear }
+                    style = { styles.icon }
                     onClick = { this.props.onClickIcon }
-                    iconStyle = { gearStyle }
+                    iconStyle = { iconStyle }
                 >
 
                     { this.props.loggedIn ? (<Settings />) : (<Person />) }

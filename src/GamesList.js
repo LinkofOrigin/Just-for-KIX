@@ -2,16 +2,15 @@ import React, { Component, PropTypes } from 'react';
 
 import GameIcon from './GameIcon';
 
-import { gameIconSideLengthPixels } from './constants';
-const listMarginPixels = 10;
+import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
 
 const rootStyle = {
     fontFamily: 'Roboto',
 };
 
 const defaultStyle = {
-    minHeight: gameIconSideLengthPixels + (2 * listMarginPixels),
-    margin: listMarginPixels,
+    minHeight: `${(2 * gameIconMarginVH) + gameIconSideLengthVH}vh`,
+    margin: gameIconMarginVH,
 };
 
 const h3Style = {

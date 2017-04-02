@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 
-import { gameIconSideLengthPixels } from './constants';
+import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
 
 const style = {
-    margin: '10px',
+    margin: `${gameIconMarginVH}vh`,
+    marginRight: 0,
     display: 'inline-block',
     backgroundColor: '#333',
     color: '#fff',
-    width: gameIconSideLengthPixels,
-    height: gameIconSideLengthPixels,
+    width: `${gameIconSideLengthVH}vh`,
+    height: `${gameIconSideLengthVH}vh`,
     textAlign: 'center',
     fontSize: '13px',
     cursor: 'pointer',
@@ -18,7 +19,6 @@ function dragStart(event) {
     const fromListName = event.target.getAttribute('data-tag');
     event.dataTransfer.setData('from-list-name', fromListName);
     event.dataTransfer.setData('game-id', event.target.id);
-    console.log();
 }
 
 const GameIcon = ({ fromListName, name }) => {
