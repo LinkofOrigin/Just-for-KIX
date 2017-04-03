@@ -1,4 +1,4 @@
-# Just-for-KIX-HCI-Project-
+# Just-for-KIX
 Project for CS 497 Human Computer Interaction
 
 ## Getting started
@@ -13,3 +13,8 @@ npm start
 ```
 
 load up http://localhost:5000/
+
+
+## Demo
+
+https://linkoforigin.github.io/Just-for-KIX/
