@@ -28,12 +28,14 @@ const loginStyle = {
 
 const inputWrapStyle = {
     display: 'inline-block',
-    textAlign: 'right',
+    textAlign: 'left',
 };
 
 const initialState = {
     usernameValue: "",
     passwordValue: "",
+    userError: false,
+    passError: false,
 };
 
 export default class LoggedOutBottomContent extends Component {
@@ -44,18 +46,22 @@ export default class LoggedOutBottomContent extends Component {
     
     handleLoginClick = () => {
         let userVal = this.state.usernameValue;
-        console.log(userVal);
         let passVal = this.state.passwordValue;
-        console.log(passVal);
+        if(userVal !== "user") this.setState({userError: true});
+        if(passVal !== "pass") this.setState({passError: true});
+        if(!this.state.userError && !this.state.passError) {
+            this.props.handleLogin();
+        }
     };
     
     handleUsernameChange = (e) => {
-        console.log(e.target.value);
-        this.setState({ usernameValue: e.target.value })
+        this.setState({ usernameValue: e.target.value });
+        if(this.state.userError) this.setState({userError: false});
     };
     
     handlePasswordChange = (e) => {
-        this.setState({ passwordValue: e.target.value })
+        this.setState({ passwordValue: e.target.value });
+        if(this.state.passError) this.setState({passError: false});
     };
     
     render() {
@@ -68,6 +74,7 @@ export default class LoggedOutBottomContent extends Component {
                             floatingLabelText = 'Username'
                             value = { this.state.usernameValue }
                             onChange = { this.handleUsernameChange }
+                            errorText = {this.state.userError}
                         />
                         <br />
                         <TextField
@@ -75,6 +82,7 @@ export default class LoggedOutBottomContent extends Component {
                             type = 'password'
                             value = { this.state.passwordValue }
                             onChange = { this.handlePasswordChange }
+                            errorText = { this.state.passError }
                         />
                     </div>
                     <br />
@@ -82,9 +90,8 @@ export default class LoggedOutBottomContent extends Component {
                         style = { buttonStyle }
                         label = 'Log In!'
                         type = 'submit'
-                        onClick = { this.props.handleLoginClick }
+                        onClick = { this.handleLoginClick }
                     />
-                    
                 </Paper>
             </div>
         );

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import GamesList from './GamesList';
 
@@ -30,9 +31,10 @@ export default class LoggedInBottomContent extends Component {
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesOld'
                 />
-                <button type = 'submit' onClick = { this.props.handleLogout }>
-                    log out!
-                </button>
+                <RaisedButton 
+                    onClick = { this.props.handleLogout }
+                    label = 'Log Out'
+                />
             </div>
         );
     }
