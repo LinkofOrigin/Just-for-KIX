@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d4ef00d74c907bcbe9c1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "86e9852936cbfe10046f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -700,7 +700,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/static/";
+/******/ 	__webpack_require__.p = "https://linkoforigin.github.io/Just-for-KIX/dist/";
 
 /******/ 	// __webpack_hash__
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
