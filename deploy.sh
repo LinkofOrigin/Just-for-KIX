@@ -4,3 +4,7 @@ git stash
 git checkout gh-pages
 rm -rf dist/
 mv ~/dist/ .
+git commit -m "deploying!"
+git push
+git checkout master
+git stash pop
