@@ -43,8 +43,9 @@ export default class Header extends Component {
             <div style = { styles.top }>
                 <GamesList
                     list = { this.props.list }
-                    handleAddGame = { this.props.handleAddGame }
                     listName = 'activeGames'
+                    editable = { false }
+                    handleAddGame = { this.props.handleAddGame }
                 />
                 <IconButton
                     style = { styles.icon }

@@ -50,7 +50,16 @@ export default class GamesList extends Component {
         }
 
         const style = Object.assign({}, defaultStyle);
-
+        
+        let dragOverFunc = false;
+        let dragLeaveFunc = false;
+        let dropFunc = false;
+        if(this.props.editable) {
+            dragOverFunc = this.handleDragOver;
+            dragLeaveFunc = this.handleDragLeave;
+            dropFunc = this.handleDrop;
+        }
+        
         if (this.state.hover) {
             style.backgroundColor = 'gray';
         }
@@ -60,9 +69,9 @@ export default class GamesList extends Component {
                 { listTitle }
                 <div
                     style = { style }
-                    onDragOver = { this.handleDragOver }
-                    onDragLeave = { this.handleDragLeave }
-                    onDrop = { this.handleDrop }
+                    onDragOver = { dragOverFunc }
+                    onDragLeave = { dragLeaveFunc }
+                    onDrop = { dropFunc }
                 >
                     {
                         this.props.list.map((game, index) => {
@@ -86,5 +95,6 @@ GamesList.propTypes = {
     list: PropTypes.array.isRequired,
     listName: PropTypes.string.isRequired,
     title: PropTypes.string,
+    editable: PropTypes.bool.isRequired,
     handleAddGame: PropTypes.func.isRequired,
 };

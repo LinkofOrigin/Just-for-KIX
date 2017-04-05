@@ -18,6 +18,7 @@ const styles = {
 const initialState = {
     loggedIn: false,
     ageChosen: false,
+    mode: 'none',
     bottomVisible: false,
     activeGames: [],
     inactiveGamesYoung: [
@@ -46,8 +47,16 @@ export default class JustForKix extends Component {
         this.setState({ bottomVisible: !this.state.bottomVisible });
     };
 
-    handleLogin = () => this.setState({ loggedIn: true });
-    handleLogout = () => this.setState({ loggedIn: false });
+    handleLogin = () => this.setState({
+        loggedIn: true,
+        mode: 'adult',
+        activeGames: [],
+    });
+    handleLogout = () => this.setState({
+        loggedIn: false,
+        mode: 'none',
+        ageChosen: false,
+    });
 
     handleAddGame = (fromListName, toListName, gameId) => {
         const toList = this.state[toListName];
@@ -72,7 +81,6 @@ export default class JustForKix extends Component {
             {
                 ageChosen: true,
                 activeGames: this.state.inactiveGamesYoung,
-                inactiveGamesYoung: [],
             }
         );
     };
@@ -82,7 +90,6 @@ export default class JustForKix extends Component {
             {
                 ageChosen: true,
                 activeGames: this.state.inactiveGamesMiddle,
-                inactiveGamesMiddle: [],
             }
         );
     };
@@ -92,10 +99,23 @@ export default class JustForKix extends Component {
             {
                 ageChosen: true,
                 activeGames: this.state.inactiveGamesOld,
-                inactiveGamesOld: [],
             }
         );
     };
+    
+    handleModeSwitch = () => {
+        if(this.state.mode === 'adult') {
+            this.setState({mode: 'child', ageChosen: false, bottomVisible: false});
+        } else if (this.state.mode === 'child') {
+            this.setState({mode: 'adult'});
+        }
+    };
+    
+    handleListChange = () => this.setState({
+        ageChosen: false,
+        bottomVisible: false,
+    });
+    
 
     render() {
         const styleOne = Object.assign({}, styles.bottom);
@@ -111,7 +131,7 @@ export default class JustForKix extends Component {
         styleTwo.overflow = this.state.bottomVisible ? 'default' : 'hidden';
         
         let topContent;
-        if(!this.state.loggedIn && !this.state.ageChosen) {
+        if(!this.state.ageChosen) {
             topContent = (
                 <InitialTopContent
                     youngListHandle = { this.handleYoungListSelection }
@@ -122,7 +142,7 @@ export default class JustForKix extends Component {
         }
         
         let bottomContent;
-        if (this.state.loggedIn) {
+        if (this.state.loggedIn && this.state.mode === 'adult') {
             bottomContent = (
                 <LoggedInBottomContent
                     inactiveGamesYoung = { this.state.inactiveGamesYoung }
@@ -130,14 +150,22 @@ export default class JustForKix extends Component {
                     inactiveGamesOld = { this.state.inactiveGamesOld }
                     handleLogout = { this.handleLogout }
                     handleAddGame = { this.handleAddGame }
+                    handleModeSwitch = { this.handleModeSwitch }
                 />
             );
         } else {
             bottomContent = (
                 <LoggedOutBottomContent
+                    mode = { this.state.mode }
                     handleLogin = { this.handleLogin }
+                    handleListChange = { this.handleListChange }
                 />
             );
+        }
+        
+        let activeGames = this.state.activeGames;
+        if(this.state.mode === 'adult') {
+            activeGames = [];
         }
         
         return (
@@ -145,7 +173,7 @@ export default class JustForKix extends Component {
                 <Header
                     open = { this.state.bottomVisible }
                     loggedIn = { this.state.loggedIn }
-                    list = { this.state.activeGames }
+                    list = { activeGames }
                     onClickIcon = { this.handleClickIcon }
                     handleAddGame = { this.handleAddGame }
                 />

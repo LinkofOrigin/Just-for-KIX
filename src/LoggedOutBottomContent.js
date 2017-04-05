@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
     textAlign: 'center',
+    paddingTop: '20px',
 };
 
 const paperStyle = {
@@ -73,8 +74,15 @@ export default class LoggedOutBottomContent extends Component {
     };
     
     render() {
+        
+        let loginButtonText = this.props.mode === 'child' ? 'Switch to Adult Mode' : 'Log In!';
+        
         return (
             <div style = { style }>
+                <RaisedButton
+                    label = 'Switch Games'
+                    onClick = { this.props.handleListChange }
+                />
                 <Paper style = { paperStyle } zDepth = { 2 }>
                     <p style = { loginStyle }>Just for KIX</p>
                     <div style = { inputWrapStyle }>
@@ -96,7 +104,7 @@ export default class LoggedOutBottomContent extends Component {
                     <br />
                     <RaisedButton
                         style = { buttonStyle }
-                        label = 'Log In!'
+                        label = { loginButtonText }
                         type = 'submit'
                         onClick = { this.handleLoginClick }
                     />
@@ -107,5 +115,7 @@ export default class LoggedOutBottomContent extends Component {
 }
 
 LoggedOutBottomContent.propTypes = {
+    mode: PropTypes.string.isRequired,
     handleLogin: PropTypes.func.isRequired,
+    handleListChange: PropTypes.func.isRequired,
 };

@@ -7,8 +7,12 @@ const styles = {
     root: {
         padding: '10px',
     },
-    logoutStyle: {
-        marginTop: '15px',
+    buttonConStyle: {
+        marginTop: '30px',
+        textAlign: 'center',
+    },
+    buttonStyle: {
+        margin: '0 20px',
     },
 };
 
@@ -19,26 +23,36 @@ export default class LoggedInBottomContent extends Component {
                 <GamesList
                     title = 'Young'
                     list = { this.props.inactiveGamesYoung }
+                    editable = { true }
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesYoung'
                 />
                 <GamesList
                     title = 'Middle'
                     list = { this.props.inactiveGamesMiddle }
+                    editable = { true }
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesMiddle'
                 />
                 <GamesList
                     title = 'Old'
                     list = { this.props.inactiveGamesOld }
+                    editable = { true }
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesOld'
                 />
-                <RaisedButton
-                    style = { styles.logoutStyle }
-                    onClick = { this.props.handleLogout }
-                    label = 'Log Out'
-                />
+                <div style = { styles.buttonConStyle }>
+                    <RaisedButton
+                        label = 'Switch to Child Mode'
+                        style = { styles.buttonStyle }
+                        onClick = { this.props.handleModeSwitch }
+                    />
+                    <RaisedButton
+                        label = 'Log Out'
+                        style = { styles.buttonStyle }
+                        onClick = { this.props.handleLogout }
+                    />
+                </div>
             </div>
         );
     }
@@ -49,4 +63,5 @@ LoggedInBottomContent.propTypes = {
     inactiveGamesMiddle: PropTypes.array.isRequired,
     inactiveGamesOld: PropTypes.array.isRequired,
     handleLogout: PropTypes.func.isRequired,
+    handleModeSwitch: PropTypes.func.isRequired,
 };
