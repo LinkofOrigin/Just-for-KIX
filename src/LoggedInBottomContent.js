@@ -7,6 +7,9 @@ const styles = {
     root: {
         padding: '10px',
     },
+    logoutStyle: {
+        marginTop: '15px',
+    },
 };
 
 export default class LoggedInBottomContent extends Component {
@@ -31,7 +34,8 @@ export default class LoggedInBottomContent extends Component {
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesOld'
                 />
-                <RaisedButton 
+                <RaisedButton
+                    style = { styles.logoutStyle }
                     onClick = { this.props.handleLogout }
                     label = 'Log Out'
                 />

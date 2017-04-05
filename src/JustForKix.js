@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { grey600 } from 'material-ui/styles/colors';
 import Header from './Header';
+import InitialTopContent from './InitialTopContent';
 import LoggedInBottomContent from './LoggedInBottomContent';
 import LoggedOutBottomContent from './LoggedOutBottomContent';
 
@@ -16,21 +17,20 @@ const styles = {
 
 const initialState = {
     loggedIn: false,
+    ageChosen: false,
     bottomVisible: false,
-    activeGames: [
+    activeGames: [],
+    inactiveGamesYoung: [
         'game-one',
         'game-two',
     ],
-    inactiveGamesYoung: [
+    inactiveGamesMiddle: [
         'game-three',
         'game-four',
     ],
-    inactiveGamesMiddle: [
+    inactiveGamesOld: [
         'game-five',
         'game-six',
-    ],
-    inactiveGamesOld: [
-        'game-seven',
     ],
 };
 
@@ -66,6 +66,36 @@ export default class JustForKix extends Component {
 
         this.setState(newState);
     };
+    
+    handleYoungListSelection = () => {
+        this.setState(
+            {
+                ageChosen: true,
+                activeGames: this.state.inactiveGamesYoung,
+                inactiveGamesYoung: [],
+            }
+        );
+    };
+    
+    handleMiddleListSelection = () => {
+        this.setState(
+            {
+                ageChosen: true,
+                activeGames: this.state.inactiveGamesMiddle,
+                inactiveGamesMiddle: [],
+            }
+        );
+    };
+    
+    handleOldListSelection = () => {
+        this.setState(
+            {
+                ageChosen: true,
+                activeGames: this.state.inactiveGamesOld,
+                inactiveGamesOld: [],
+            }
+        );
+    };
 
     render() {
         const styleOne = Object.assign({}, styles.bottom);
@@ -79,7 +109,18 @@ export default class JustForKix extends Component {
         const styleTwo = Object.assign({}, styles.bottom);
         styleTwo.height = this.state.bottomVisible ? '90vh' : '0';
         styleTwo.overflow = this.state.bottomVisible ? 'default' : 'hidden';
-
+        
+        let topContent;
+        if(!this.state.loggedIn && !this.state.ageChosen) {
+            topContent = (
+                <InitialTopContent
+                    youngListHandle = { this.handleYoungListSelection }
+                    middleListHandle = { this.handleMiddleListSelection }
+                    oldListHandle = { this.handleOldListSelection }
+                />
+            );
+        }
+        
         let bottomContent;
         if (this.state.loggedIn) {
             bottomContent = (
@@ -98,7 +139,7 @@ export default class JustForKix extends Component {
                 />
             );
         }
-
+        
         return (
             <div style = { { overflow: 'hidden' } }>
                 <Header
@@ -109,7 +150,7 @@ export default class JustForKix extends Component {
                     handleAddGame = { this.handleAddGame }
                 />
                 <div style = { styleOne }>
-                    {/*<div>Game to play!</div>*/}
+                    { topContent }
                 </div>
                 <div style = { styleTwo }>
                     { bottomContent }

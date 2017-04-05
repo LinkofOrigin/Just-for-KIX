@@ -47,9 +47,17 @@ export default class LoggedOutBottomContent extends Component {
     handleLoginClick = () => {
         let userVal = this.state.usernameValue;
         let passVal = this.state.passwordValue;
-        if(userVal !== "user") this.setState({userError: true});
-        if(passVal !== "pass") this.setState({passError: true});
-        if(!this.state.userError && !this.state.passError) {
+        let userValid = true;
+        let passValid = true;
+        if(userVal !== "user") userValid = false;
+        if(passVal !== "pass") passValid = false;
+        if(!userValid || !passValid) {
+            let newState = {};
+            if(!userValid) newState.userError = true;
+            if(!passValid) newState.passError = true;
+            this.setState(newState);
+        }
+        if(userValid && passValid) {
             this.props.handleLogin();
         }
     };
@@ -74,7 +82,7 @@ export default class LoggedOutBottomContent extends Component {
                             floatingLabelText = 'Username'
                             value = { this.state.usernameValue }
                             onChange = { this.handleUsernameChange }
-                            errorText = {this.state.userError}
+                            errorText = { this.state.userError }
                         />
                         <br />
                         <TextField
