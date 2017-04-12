@@ -45,6 +45,11 @@ export default class LoggedOutBottomContent extends Component {
         this.state = initialState;
     }
     
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        this.handleLoginClick();
+    };
+    
     handleLoginClick = () => {
         let userVal = this.state.usernameValue;
         let passVal = this.state.passwordValue;
@@ -84,30 +89,32 @@ export default class LoggedOutBottomContent extends Component {
                     onClick = { this.props.handleListChange }
                 />
                 <Paper style = { paperStyle } zDepth = { 2 }>
-                    <p style = { loginStyle }>Just for KIX</p>
-                    <div style = { inputWrapStyle }>
-                        <TextField
-                            floatingLabelText = 'Username'
-                            value = { this.state.usernameValue }
-                            onChange = { this.handleUsernameChange }
-                            errorText = { this.state.userError }
-                        />
+                    <form onSubmit = { this.handleFormSubmit }>
+                        <p style = { loginStyle }>Just for KIX</p>
+                        <div style = { inputWrapStyle }>
+                            <TextField
+                                floatingLabelText = 'Username'
+                                value = { this.state.usernameValue }
+                                onChange = { this.handleUsernameChange }
+                                errorText = { this.state.userError }
+                            />
+                            <br />
+                            <TextField
+                                floatingLabelText = 'Password'
+                                type = 'password'
+                                value = { this.state.passwordValue }
+                                onChange = { this.handlePasswordChange }
+                                errorText = { this.state.passError }
+                            />
+                        </div>
                         <br />
-                        <TextField
-                            floatingLabelText = 'Password'
-                            type = 'password'
-                            value = { this.state.passwordValue }
-                            onChange = { this.handlePasswordChange }
-                            errorText = { this.state.passError }
+                        <RaisedButton
+                            style = { buttonStyle }
+                            label = { loginButtonText }
+                            type = 'submit'
+                            onClick = { this.handleLoginClick }
                         />
-                    </div>
-                    <br />
-                    <RaisedButton
-                        style = { buttonStyle }
-                        label = { loginButtonText }
-                        type = 'submit'
-                        onClick = { this.handleLoginClick }
-                    />
+                    </form>
                 </Paper>
             </div>
         );
