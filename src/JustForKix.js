@@ -15,6 +15,7 @@ const styles = {
     },
 };
 
+// TODO: restructure for dynamic list manipulation
 const initialState = {
     loggedIn: false,
     ageChosen: false,

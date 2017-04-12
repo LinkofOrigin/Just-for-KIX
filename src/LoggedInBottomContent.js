@@ -16,12 +16,6 @@ const styles = {
     },
 };
 
-const initialState = {
-    lists: {
-
-    },
-};
-
 export default class LoggedInBottomContent extends Component {
     constructor() {
         super();
@@ -75,4 +69,5 @@ LoggedInBottomContent.propTypes = {
     inactiveGamesOld: PropTypes.array.isRequired,
     handleLogout: PropTypes.func.isRequired,
     handleModeSwitch: PropTypes.func.isRequired,
+    handleAddGame: PropTypes.func.isRequred,
 };
