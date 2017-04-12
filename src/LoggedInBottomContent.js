@@ -16,28 +16,39 @@ const styles = {
     },
 };
 
+const initialState = {
+    lists: {
+
+    },
+};
+
 export default class LoggedInBottomContent extends Component {
+    constructor() {
+        super();
+        this.state = initialState;
+    }
+
     render() {
         return (
             <div style = { styles.root }>
                 <GamesList
                     title = 'Young'
                     list = { this.props.inactiveGamesYoung }
-                    editable = { true }
+                    editable
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesYoung'
                 />
                 <GamesList
                     title = 'Middle'
                     list = { this.props.inactiveGamesMiddle }
-                    editable = { true }
+                    editable
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesMiddle'
                 />
                 <GamesList
                     title = 'Old'
                     list = { this.props.inactiveGamesOld }
-                    editable = { true }
+                    editable
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesOld'
                 />

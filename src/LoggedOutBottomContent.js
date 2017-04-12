@@ -33,8 +33,8 @@ const inputWrapStyle = {
 };
 
 const initialState = {
-    usernameValue: "",
-    passwordValue: "",
+    usernameValue: '',
+    passwordValue: '',
     userError: false,
     passError: false,
 };
@@ -44,44 +44,43 @@ export default class LoggedOutBottomContent extends Component {
         super();
         this.state = initialState;
     }
-    
+
     handleFormSubmit = (e) => {
         e.preventDefault();
         this.handleLoginClick();
     };
-    
+
     handleLoginClick = () => {
-        let userVal = this.state.usernameValue;
-        let passVal = this.state.passwordValue;
+        const userVal = this.state.usernameValue;
+        const passVal = this.state.passwordValue;
         let userValid = true;
         let passValid = true;
-        if(userVal !== "user") userValid = false;
-        if(passVal !== "pass") passValid = false;
-        if(!userValid || !passValid) {
-            let newState = {};
-            if(!userValid) newState.userError = true;
-            if(!passValid) newState.passError = true;
+        if (userVal !== 'user') userValid = false;
+        if (passVal !== 'pass') passValid = false;
+        if (!userValid || !passValid) {
+            const newState = {};
+            if (!userValid) newState.userError = true;
+            if (!passValid) newState.passError = true;
             this.setState(newState);
         }
-        if(userValid && passValid) {
+        if (userValid && passValid) {
             this.props.handleLogin();
         }
     };
-    
+
     handleUsernameChange = (e) => {
         this.setState({ usernameValue: e.target.value });
-        if(this.state.userError) this.setState({userError: false});
+        if (this.state.userError) this.setState({ userError: false });
     };
-    
+
     handlePasswordChange = (e) => {
         this.setState({ passwordValue: e.target.value });
-        if(this.state.passError) this.setState({passError: false});
+        if (this.state.passError) this.setState({ passError: false });
     };
-    
+
     render() {
-        
-        let loginButtonText = this.props.mode === 'child' ? 'Switch to Adult Mode' : 'Log In!';
-        
+        const loginButtonText = this.props.mode === 'child' ? 'Switch to Adult Mode' : 'Log In!';
+
         return (
             <div style = { style }>
                 <RaisedButton

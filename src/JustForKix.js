@@ -75,47 +75,47 @@ export default class JustForKix extends Component {
 
         this.setState(newState);
     };
-    
+
     handleYoungListSelection = () => {
         this.setState(
             {
                 ageChosen: true,
                 activeGames: this.state.inactiveGamesYoung,
-            }
+            },
         );
     };
-    
+
     handleMiddleListSelection = () => {
         this.setState(
             {
                 ageChosen: true,
                 activeGames: this.state.inactiveGamesMiddle,
-            }
+            },
         );
     };
-    
+
     handleOldListSelection = () => {
         this.setState(
             {
                 ageChosen: true,
                 activeGames: this.state.inactiveGamesOld,
-            }
+            },
         );
     };
-    
+
     handleModeSwitch = () => {
-        if(this.state.mode === 'adult') {
-            this.setState({mode: 'child', ageChosen: false, bottomVisible: false});
+        if (this.state.mode === 'adult') {
+            this.setState({ mode: 'child', ageChosen: false, bottomVisible: false });
         } else if (this.state.mode === 'child') {
-            this.setState({mode: 'adult'});
+            this.setState({ mode: 'adult' });
         }
     };
-    
+
     handleListChange = () => this.setState({
         ageChosen: false,
         bottomVisible: false,
     });
-    
+
 
     render() {
         const styleOne = Object.assign({}, styles.bottom);
@@ -129,9 +129,9 @@ export default class JustForKix extends Component {
         const styleTwo = Object.assign({}, styles.bottom);
         styleTwo.height = this.state.bottomVisible ? '90vh' : '0';
         styleTwo.overflow = this.state.bottomVisible ? 'default' : 'hidden';
-        
+
         let topContent;
-        if(!this.state.ageChosen) {
+        if (!this.state.ageChosen) {
             topContent = (
                 <InitialTopContent
                     youngListHandle = { this.handleYoungListSelection }
@@ -140,7 +140,7 @@ export default class JustForKix extends Component {
                 />
             );
         }
-        
+
         let bottomContent;
         if (this.state.loggedIn && this.state.mode === 'adult') {
             bottomContent = (
@@ -162,12 +162,12 @@ export default class JustForKix extends Component {
                 />
             );
         }
-        
+
         let activeGames = this.state.activeGames;
-        if(this.state.mode === 'adult') {
+        if (this.state.mode === 'adult') {
             activeGames = [];
         }
-        
+
         return (
             <div style = { { overflow: 'hidden' } }>
                 <Header

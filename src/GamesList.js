@@ -50,16 +50,16 @@ export default class GamesList extends Component {
         }
 
         const style = Object.assign({}, defaultStyle);
-        
+
         let dragOverFunc = false;
         let dragLeaveFunc = false;
         let dropFunc = false;
-        if(this.props.editable) {
+        if (this.props.editable) {
             dragOverFunc = this.handleDragOver;
             dragLeaveFunc = this.handleDragLeave;
             dropFunc = this.handleDrop;
         }
-        
+
         if (this.state.hover) {
             style.backgroundColor = 'gray';
         }
