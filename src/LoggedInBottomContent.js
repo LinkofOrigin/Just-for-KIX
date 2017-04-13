@@ -27,21 +27,21 @@ export default class LoggedInBottomContent extends Component {
             <div style = { styles.root }>
                 <GamesList
                     title = 'Young'
-                    list = { this.props.inactiveGamesYoung }
+                    list = { this.props.lists[0] }
                     editable
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesYoung'
                 />
                 <GamesList
                     title = 'Middle'
-                    list = { this.props.inactiveGamesMiddle }
+                    list = { this.props.lists[1] }
                     editable
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesMiddle'
                 />
                 <GamesList
                     title = 'Old'
-                    list = { this.props.inactiveGamesOld }
+                    list = { this.props.lists[2] }
                     editable
                     handleAddGame = { this.props.handleAddGame }
                     listName = 'inactiveGamesOld'
@@ -64,9 +64,7 @@ export default class LoggedInBottomContent extends Component {
 }
 
 LoggedInBottomContent.propTypes = {
-    inactiveGamesYoung: PropTypes.array.isRequired,
-    inactiveGamesMiddle: PropTypes.array.isRequired,
-    inactiveGamesOld: PropTypes.array.isRequired,
+    lists: PropTypes.array.isRequired,
     handleLogout: PropTypes.func.isRequired,
     handleModeSwitch: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequred,

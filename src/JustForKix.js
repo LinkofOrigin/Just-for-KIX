@@ -22,17 +22,19 @@ const initialState = {
     mode: 'none',
     bottomVisible: false,
     activeGames: [],
-    inactiveGamesYoung: [
-        'game-one',
-        'game-two',
-    ],
-    inactiveGamesMiddle: [
-        'game-three',
-        'game-four',
-    ],
-    inactiveGamesOld: [
-        'game-five',
-        'game-six',
+    lists: [
+        [
+            'game-one',
+            'game-two',
+        ],
+        [
+            'game-three',
+            'game-four',
+        ],
+        [
+            'game-five',
+            'game-six',
+        ],
     ],
 };
 
@@ -146,9 +148,7 @@ export default class JustForKix extends Component {
         if (this.state.loggedIn && this.state.mode === 'adult') {
             bottomContent = (
                 <LoggedInBottomContent
-                    inactiveGamesYoung = { this.state.inactiveGamesYoung }
-                    inactiveGamesMiddle = { this.state.inactiveGamesMiddle }
-                    inactiveGamesOld = { this.state.inactiveGamesOld }
+                    lists = { this.state.lists }
                     handleLogout = { this.handleLogout }
                     handleAddGame = { this.handleAddGame }
                     handleModeSwitch = { this.handleModeSwitch }
