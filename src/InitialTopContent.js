@@ -25,19 +25,26 @@ const styles = {
 };
 
 export default class InitialTopContent extends Component {
+    
+    handleSelection = (event) => {
+        this.props.listHandle(event.target.id);
+    };
+    
     render() {
         return (
             <div style = { styles.ageChoiceStyle }>
                 <div style = { styles.boxContStyle }>
-                    <div style = { styles.boxChoiceStyle } onClick = { this.props.youngListHandle }>
-                        Age 3-7
-                    </div>
-                    <div style = { styles.boxChoiceStyle } onClick = { this.props.middleListHandle }>
-                        Age 8-12
-                    </div>
-                    <div style = { styles.boxChoiceStyle } onClick = { this.props.oldListHandle }>
-                        Age 13-15
-                    </div>
+                    {
+                        this.props.lists.map((list, index) =>
+                            <div
+                                key = { list.name + index }
+                                id = { list.name }
+                                style = { styles.boxChoiceStyle }
+                                onClick = { this.handleSelection }>
+                                { list.name }
+                            </div>
+                        )
+                    }
                 </div>
             </div>  
         );
@@ -45,7 +52,5 @@ export default class InitialTopContent extends Component {
 }
 
 InitialTopContent.propTypes = {
-    youngListHandle: PropTypes.func.isRequired,
-    middleListHandle: PropTypes.func.isRequired,
-    oldListHandle: PropTypes.func.isRequired,
+    listHandle: PropTypes.func.isRequired,
 };

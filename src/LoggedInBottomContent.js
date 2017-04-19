@@ -17,35 +17,22 @@ const styles = {
 };
 
 export default class LoggedInBottomContent extends Component {
-    constructor() {
-        super();
-        this.state = initialState;
-    }
-
     render() {
         return (
             <div style = { styles.root }>
-                <GamesList
-                    title = 'Young'
-                    list = { this.props.lists[0] }
-                    editable
-                    handleAddGame = { this.props.handleAddGame }
-                    listName = 'inactiveGamesYoung'
-                />
-                <GamesList
-                    title = 'Middle'
-                    list = { this.props.lists[1] }
-                    editable
-                    handleAddGame = { this.props.handleAddGame }
-                    listName = 'inactiveGamesMiddle'
-                />
-                <GamesList
-                    title = 'Old'
-                    list = { this.props.lists[2] }
-                    editable
-                    handleAddGame = { this.props.handleAddGame }
-                    listName = 'inactiveGamesOld'
-                />
+                {
+                    this.props.lists.map((list, index) =>
+                        <GamesList
+                            key = { list.name + index }
+                            title = { list.name }
+                            list = { list.games }
+                            listName = { list.name }
+                            editable
+                            handleAddGame= { this.props.handleAddGame }
+                        />
+                    )
+                }
+                
                 <div style = { styles.buttonConStyle }>
                     <RaisedButton
                         label = 'Switch to Child Mode'
@@ -67,5 +54,5 @@ LoggedInBottomContent.propTypes = {
     lists: PropTypes.array.isRequired,
     handleLogout: PropTypes.func.isRequired,
     handleModeSwitch: PropTypes.func.isRequired,
-    handleAddGame: PropTypes.func.isRequred,
+    handleAddGame: PropTypes.func.isRequired,
 };

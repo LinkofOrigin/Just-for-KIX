@@ -111,7 +111,6 @@ export default class LoggedOutBottomContent extends Component {
                             style = { buttonStyle }
                             label = { loginButtonText }
                             type = 'submit'
-                            onClick = { this.handleLoginClick }
                         />
                     </form>
                 </Paper>

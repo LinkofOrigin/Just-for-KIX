@@ -23,18 +23,27 @@ const initialState = {
     bottomVisible: false,
     activeGames: [],
     lists: [
-        [
-            'game-one',
-            'game-two',
-        ],
-        [
-            'game-three',
-            'game-four',
-        ],
-        [
-            'game-five',
-            'game-six',
-        ],
+        {
+            name: "Young",
+            games: [
+                'game-one',
+                'game-two',
+            ]
+        },
+        {
+            name: "Middle",
+            games: [
+                'game-three',
+                'game-four',
+            ]
+        },
+        {
+            name: "Old",
+            games: [
+                'game-five',
+                'game-six',
+            ]
+        },
     ],
 };
 
@@ -79,29 +88,12 @@ export default class JustForKix extends Component {
         this.setState(newState);
     };
 
-    handleYoungListSelection = () => {
+    handleListSelection = (listName) => {
+        let list = this.getList(listName);
         this.setState(
             {
                 ageChosen: true,
-                activeGames: this.state.inactiveGamesYoung,
-            },
-        );
-    };
-
-    handleMiddleListSelection = () => {
-        this.setState(
-            {
-                ageChosen: true,
-                activeGames: this.state.inactiveGamesMiddle,
-            },
-        );
-    };
-
-    handleOldListSelection = () => {
-        this.setState(
-            {
-                ageChosen: true,
-                activeGames: this.state.inactiveGamesOld,
+                activeGames: list.games,
             },
         );
     };
@@ -118,6 +110,15 @@ export default class JustForKix extends Component {
         ageChosen: false,
         bottomVisible: false,
     });
+    
+    getList = (name) => {
+        let list = this.state.lists.filter((list) => {
+            if(list.name === name) {
+                return true;
+            }
+        });
+        return list[0];
+    };
 
 
     render() {
@@ -137,9 +138,8 @@ export default class JustForKix extends Component {
         if (!this.state.ageChosen) {
             topContent = (
                 <InitialTopContent
-                    youngListHandle = { this.handleYoungListSelection }
-                    middleListHandle = { this.handleMiddleListSelection }
-                    oldListHandle = { this.handleOldListSelection }
+                    listHandle = { this.handleListSelection }
+                    lists = { this.state.lists }
                 />
             );
         }
