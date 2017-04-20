@@ -50,8 +50,7 @@ export default class GamesList extends Component {
     
     handleTitleEdit = (e) => {
         e.preventDefault();
-        let newName = document.getElementById(this.props.title).value;
-        console.log(newName);
+        let newName = document.getElementById(this.props.title).innerHTML;
         this.setState({editing: false});
         this.props.handleTitleEdit(this.props.title, newName);
     };
@@ -60,7 +59,12 @@ export default class GamesList extends Component {
         this.setState({ title: e.target.value });
     };
     
-    handleEditing = () => {this.setState({editing: true})};
+    handleEditing = () => {
+        this.setState({
+            editing: true,
+            title: this.props.title,
+        });
+    };
     
     render() {
         let listTitle;
