@@ -15,7 +15,6 @@ const styles = {
     },
 };
 
-// TODO: restructure for dynamic list manipulation
 const initialState = {
     loggedIn: false,
     ageChosen: false,
@@ -71,19 +70,19 @@ export default class JustForKix extends Component {
     });
 
     handleAddGame = (fromListName, toListName, gameId) => {
-        const toList = this.state[toListName];
-        toList.push(gameId);
+        let newLists = this.state.lists;
+        const toListInd = this.getListIndex(toListName);
+        newLists[toListInd].games.push(gameId);
 
         // remove from list.
-        const fromList = this.state[fromListName];
-        const index = fromList.indexOf(gameId);
+        const fromListInd = this.getListIndex(fromListName);
+        const index = newLists[fromListInd].games.indexOf(gameId);
         if (index > -1) {
-            fromList.splice(index, 1);
+            newLists[fromListInd].games.splice(index, 1);
         }
 
         const newState = {};
-        newState[toListName] = toList;
-        newState[fromListName] = fromList;
+        newState.lists = newLists;
 
         this.setState(newState);
     };
@@ -111,6 +110,14 @@ export default class JustForKix extends Component {
         bottomVisible: false,
     });
     
+    handleTitleEdit = (oldName, newName) => {
+        let newState = {};
+        newState.lists = this.state.lists;
+        let listInd = this.getListIndex(oldName);
+        newState.lists[listInd].name = newName;
+        this.setState(newState);
+    };
+    
     getList = (name) => {
         let list = this.state.lists.filter((list) => {
             if(list.name === name) {
@@ -120,7 +127,14 @@ export default class JustForKix extends Component {
         return list[0];
     };
 
-
+    getListIndex = (name) => {
+        return this.state.lists.findIndex((list) => {
+            if(list.name === name) {
+                return true;
+            }
+        });
+    };
+    
     render() {
         const styleOne = Object.assign({}, styles.bottom);
         styleOne.height = this.state.bottomVisible ? '0' : '90vh';
@@ -152,6 +166,7 @@ export default class JustForKix extends Component {
                     handleLogout = { this.handleLogout }
                     handleAddGame = { this.handleAddGame }
                     handleModeSwitch = { this.handleModeSwitch }
+                    handleTitleEdit = { this.handleTitleEdit }
                 />
             );
         } else {

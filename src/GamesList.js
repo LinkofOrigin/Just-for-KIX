@@ -17,12 +17,17 @@ const h3Style = {
     margin: '0 0 10px 0',
 };
 
+const initialState = 
+    {
+        hover: false,
+        editing: false,
+        title: "",
+    };
+
 export default class GamesList extends Component {
     constructor() {
         super();
-        this.state = {
-            hover: false,
-        };
+        this.state = initialState;
     }
 
     handleDragOver = (event) => {
@@ -42,15 +47,35 @@ export default class GamesList extends Component {
         this.props.handleAddGame(fromListName, this.props.listName, gameId);
         this.setState({ hover: false });
     };
-
+    
+    handleTitleEdit = (e) => {
+        e.preventDefault();
+        let newName = document.getElementById(this.props.title).value;
+        console.log(newName);
+        this.setState({editing: false});
+        this.props.handleTitleEdit(this.props.title, newName);
+    };
+    
+    handleTitleChange = (e) => {
+        this.setState({ title: e.target.value });
+    };
+    
+    handleEditing = () => {this.setState({editing: true})};
+    
     render() {
         let listTitle;
         if (this.props.title) {
-            listTitle = <h3 style = { h3Style }>{ this.props.title }</h3>;
+            if(this.props.editable) {
+                listTitle = <h3 onClick = { this.handleEditing } style = { h3Style }>{ this.props.title }</h3>;
+            } else {
+                listTitle = <h3 style = { h3Style }>{ this.props.title }</h3>;
+            }
+                    
         }
 
         const style = Object.assign({}, defaultStyle);
-
+        
+        let titleContent = listTitle;
         let dragOverFunc = false;
         let dragLeaveFunc = false;
         let dropFunc = false;
@@ -58,15 +83,28 @@ export default class GamesList extends Component {
             dragOverFunc = this.handleDragOver;
             dragLeaveFunc = this.handleDragLeave;
             dropFunc = this.handleDrop;
+            
+            if(this.state.editing) {
+                titleContent =
+                    <form onSubmit = { this.handleTitleEdit }>
+                        <input
+                            id = { this.props.title }
+                            placeholder = "List Title"
+                            value = { this.state.title }
+                            onChange = { this.handleTitleChange } />
+                        <button type = "submit">Save</button>
+                    </form>;
+            }
         }
 
         if (this.state.hover) {
             style.backgroundColor = 'gray';
         }
-
+        
         return (
             <div style = { rootStyle }>
-                { listTitle }
+                { titleContent } 
+                
                 <div
                     style = { style }
                     onDragOver = { dragOverFunc }
@@ -97,4 +135,5 @@ GamesList.propTypes = {
     title: PropTypes.string,
     editable: PropTypes.bool.isRequired,
     handleAddGame: PropTypes.func.isRequired,
+    handleTitleEdit: PropTypes.func,
 };

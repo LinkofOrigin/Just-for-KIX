@@ -27,8 +27,9 @@ export default class LoggedInBottomContent extends Component {
                             title = { list.name }
                             list = { list.games }
                             listName = { list.name }
-                            editable
+                            editable = { true }
                             handleAddGame= { this.props.handleAddGame }
+                            handleTitleEdit = { this.props.handleTitleEdit }
                         />
                     )
                 }
@@ -55,4 +56,5 @@ LoggedInBottomContent.propTypes = {
     handleLogout: PropTypes.func.isRequired,
     handleModeSwitch: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,
+    handleTitleEdit: PropTypes.func,
 };
