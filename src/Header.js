@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
-import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
-
 import { grey600, grey800 } from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import Settings from 'material-ui/svg-icons/action/settings';
 import Person from 'material-ui/svg-icons/social/person-outline';
+import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
 import GamesList from './GamesList';
 
 

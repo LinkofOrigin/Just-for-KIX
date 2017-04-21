@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import GameIcon from './GameIcon';
 import Edit from 'material-ui/svg-icons/image/edit';
+import GameIcon from './GameIcon';
 
 import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
 
@@ -26,7 +26,7 @@ const titleFormStyle = {
 const titleSaveButtonStyle = {
     position: 'relative',
     top: '50%',
-        
+
 };
 
 const h3Style = {
@@ -49,7 +49,7 @@ const titleTextStyle = {
 const initialState = {
     hover: false,
     editing: false,
-    title: "",
+    title: '',
     error: false,
 };
 
@@ -76,53 +76,50 @@ export default class GamesList extends Component {
         this.props.handleAddGame(fromListName, this.props.listName, gameId);
         this.setState({ hover: false });
     };
-    
+
     handleTitleEdit = (e) => {
         e.preventDefault();
-        let newName = this.state.title;
-        let success = this.props.handleTitleEdit(this.props.title, newName);
-        if(success) {
-            this.setState({editing: false});
+        const newName = this.state.title;
+        const success = this.props.handleTitleEdit(this.props.title, newName);
+        if (success) {
+            this.setState({ editing: false });
         } else {
             this.setState({
-                error: "A list with that name already exists! List names must be unique.",
+                error: 'A list with that name already exists! List names must be unique.',
             });
         }
-        
     };
-    
+
     handleTitleChange = (e) => {
         this.setState({
             title: e.target.value,
             error: false,
         });
     };
-    
+
     handleEditing = () => {
         this.setState({
             editing: true,
             title: this.props.title,
-        }, 
+        },
             () => {
                 this.refs.listTitle.focus();
-            }
+            },
         );
-        
     };
-    
+
     render() {
         let listTitle;
         if (this.props.title) {
-            if(this.props.editable) {
+            if (this.props.editable) {
                 listTitle = <h3 onClick = { this.handleEditing } style = { h3Style }><Edit style = { editStyle } />{ this.props.title }</h3>;
             } else {
                 listTitle = <h3 style = { h3Style }><Edit style = { editStyle } />{ this.props.title }</h3>;
             }
-                    
         }
 
         const style = Object.assign({}, defaultStyle);
-        
+
         let titleContent = listTitle;
         let dragOverFunc = false;
         let dragLeaveFunc = false;
@@ -131,37 +128,37 @@ export default class GamesList extends Component {
             dragOverFunc = this.handleDragOver;
             dragLeaveFunc = this.handleDragLeave;
             dropFunc = this.handleDrop;
-            
-            if(this.state.editing) {
+
+            if (this.state.editing) {
                 titleContent =
-                    <form style = { titleFormStyle } onSubmit = { this.handleTitleEdit }>
+                    (<form style = { titleFormStyle } onSubmit = { this.handleTitleEdit }>
                         <TextField
                             floatingLabelText = 'List Title'
                             hintText = 'List Title'
-                            ref = { "listTitle" }
+                            ref = { 'listTitle' }
                             value = { this.state.title }
                             errorText = { this.state.error }
                             onChange = { this.handleTitleChange }
                             style = { titleTextStyle }
                         />
-                        <br/>
+                        <br />
                         <RaisedButton
                             style = { titleSaveButtonStyle }
                             label = 'Save'
                             type = 'submit'
                         />
-                    </form>;
+                    </form>);
             }
-    }
+        }
 
         if (this.state.hover) {
             style.backgroundColor = 'gray';
         }
-        
+
         return (
             <div style = { rootStyle }>
-                { titleContent } 
-                
+                { titleContent }
+
                 <div
                     style = { style }
                     onDragOver = { dragOverFunc }

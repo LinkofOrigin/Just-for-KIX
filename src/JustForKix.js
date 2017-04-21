@@ -23,25 +23,25 @@ const initialState = {
     activeGames: [],
     lists: [
         {
-            name: "Young",
+            name: 'Young',
             games: [
                 'game-one',
                 'game-two',
-            ]
+            ],
         },
         {
-            name: "Middle",
+            name: 'Middle',
             games: [
                 'game-three',
                 'game-four',
-            ]
+            ],
         },
         {
-            name: "Old",
+            name: 'Old',
             games: [
                 'game-five',
                 'game-six',
-            ]
+            ],
         },
     ],
 };
@@ -51,6 +51,23 @@ export default class JustForKix extends Component {
         super();
         this.state = initialState;
     }
+
+    getList = (name) => {
+        const returnList = this.state.lists.filter((list) => {
+            if (list.name === name) {
+                return true;
+            }
+        });
+        return returnList[0];
+    };
+
+    getListIndex = (name) => {
+        return this.state.lists.findIndex((list) => {
+            if (list.name === name) {
+                return true;
+            }
+        });
+    };
 
     handleClickIcon = () => {
         // similar to this.state.bottomVisible = !this.state.bottomVisible;
@@ -70,7 +87,7 @@ export default class JustForKix extends Component {
     });
 
     handleAddGame = (fromListName, toListName, gameId) => {
-        let newLists = this.state.lists;
+        const newLists = this.state.lists;
         const toListInd = this.getListIndex(toListName);
         newLists[toListInd].games.push(gameId);
 
@@ -88,7 +105,7 @@ export default class JustForKix extends Component {
     };
 
     handleListSelection = (listName) => {
-        let list = this.getList(listName);
+        const list = this.getList(listName);
         this.setState(
             {
                 ageChosen: true,
@@ -109,42 +126,25 @@ export default class JustForKix extends Component {
         ageChosen: false,
         bottomVisible: false,
     });
-    
+
     handleTitleEdit = (oldName, newName) => {
-        let newState = {};
+        const newState = {};
         newState.lists = this.state.lists;
-        
-        let oldList = this.getListIndex(oldName);
-        let newList = this.getListIndex(newName);
+
+        const oldList = this.getListIndex(oldName);
+        const newList = this.getListIndex(newName);
         console.log(oldList);
         console.log(newList);
-        if(newList > -1 && oldList !== newList) {
-            console.log("error!!!!");
+        if (newList > -1 && oldList !== newList) {
+            console.log('error!!!!');
             return false;
-        } else {
-            newState.lists[oldList].name = newName;
-            this.setState(newState);
         }
+        newState.lists[oldList].name = newName;
+        this.setState(newState);
+
         return true;
     };
-    
-    getList = (name) => {
-        let list = this.state.lists.filter((list) => {
-            if(list.name === name) {
-                return true;
-            }
-        });
-        return list[0];
-    };
 
-    getListIndex = (name) => {
-        return this.state.lists.findIndex((list) => {
-            if(list.name === name) {
-                return true;
-            }
-        });
-    };
-    
     render() {
         const styleOne = Object.assign({}, styles.bottom);
         styleOne.height = this.state.bottomVisible ? '0' : '90vh';

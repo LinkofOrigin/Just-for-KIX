@@ -25,11 +25,11 @@ const styles = {
 };
 
 export default class InitialTopContent extends Component {
-    
+
     handleSelection = (event) => {
         this.props.listHandle(event.target.id);
     };
-    
+
     render() {
         return (
             <div style = { styles.ageChoiceStyle }>
@@ -40,13 +40,14 @@ export default class InitialTopContent extends Component {
                                 key = { list.name + index }
                                 id = { list.name }
                                 style = { styles.boxChoiceStyle }
-                                onClick = { this.handleSelection }>
+                                onClick = { this.handleSelection }
+                            >
                                 { list.name }
-                            </div>
+                            </div>,
                         )
                     }
                 </div>
-            </div>  
+            </div>
         );
     }
 }
