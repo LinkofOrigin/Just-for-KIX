@@ -135,7 +135,6 @@ export default class GamesList extends Component {
     };
 
     handleClickGame = (event) => {
-        console.log('handleClickGame');
         if (this.props.onClickGame) {
             this.props.onClickGame(event.target.id);
         }
