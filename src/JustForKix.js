@@ -103,13 +103,24 @@ export default class JustForKix extends Component {
 
         const oldList = this.getListIndex(oldName);
         const newList = this.getListIndex(newName);
-        console.log(oldList);
-        console.log(newList);
         if (newList > -1 && oldList !== newList) {
-            console.log('error!!!!');
             return false;
         }
         newState.lists[oldList].name = newName;
+        this.setState(newState);
+
+        return true;
+    };
+
+    handleAddList = (newName) => {
+        const newState = {};
+        newState.lists = this.state.lists;
+
+        const newList = this.getListIndex(newName);
+        if (newList > -1) {
+            return false;
+        }
+        newState.lists.push({ name: newName, games: [] });
         this.setState(newState);
 
         return true;
@@ -147,6 +158,7 @@ export default class JustForKix extends Component {
                     handleAddGame = { this.handleAddGame }
                     handleModeSwitch = { this.handleModeSwitch }
                     handleTitleEdit = { this.handleTitleEdit }
+                    handleAddList = { this.handleAddList }
                 />
             );
         } else {

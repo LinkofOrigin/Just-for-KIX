@@ -26,11 +26,12 @@ const titleFormStyle = {
 const titleSaveButtonStyle = {
     position: 'relative',
     top: '50%',
-
 };
 
 const h3Style = {
+    display: 'inline-block',
     margin: '0 0 10px 0',
+    paddingRight: '10px',
     cursor: 'pointer',
 };
 
@@ -112,9 +113,18 @@ export default class GamesList extends Component {
         let listTitle;
         if (this.props.title) {
             if (this.props.editable) {
-                listTitle = <h3 onClick = { this.handleEditing } style = { h3Style }><Edit style = { editStyle } />{ this.props.title }</h3>;
+                listTitle = (
+                    <h3
+                        onClick = { this.handleEditing }
+                        style = { h3Style }
+                    >
+                        <Edit style = { editStyle } />{ this.props.title }
+                    </h3>);
             } else {
-                listTitle = <h3 style = { h3Style }><Edit style = { editStyle } />{ this.props.title }</h3>;
+                listTitle = (
+                    <h3 style = { h3Style }>
+                        <Edit style = { editStyle } />{ this.props.title }
+                    </h3>);
             }
         }
 
