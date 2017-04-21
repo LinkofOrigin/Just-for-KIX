@@ -8,8 +8,6 @@ import initialState from './initial-state';
 
 import { GameImage } from './constants';
 
-const superMarioImage = require('./img/smb.jpg');
-
 const styles = {
     bottom: {
         height: '90vh',
