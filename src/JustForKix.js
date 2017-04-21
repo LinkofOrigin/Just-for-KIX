@@ -4,6 +4,7 @@ import Header from './Header';
 import InitialTopContent from './InitialTopContent';
 import LoggedInBottomContent from './LoggedInBottomContent';
 import LoggedOutBottomContent from './LoggedOutBottomContent';
+import initialState from './initial-state';
 
 const superMarioImage = require('./img/smb.jpg');
 
@@ -13,37 +14,6 @@ const styles = {
         background: grey600,
         transition: 'all 0.5s ease',
     },
-};
-
-const initialState = {
-    loggedIn: false,
-    ageChosen: false,
-    mode: 'none',
-    bottomVisible: false,
-    activeGames: [],
-    lists: [
-        {
-            name: 'Young',
-            games: [
-                'game-one',
-                'game-two',
-            ],
-        },
-        {
-            name: 'Middle',
-            games: [
-                'game-three',
-                'game-four',
-            ],
-        },
-        {
-            name: 'Old',
-            games: [
-                'game-five',
-                'game-six',
-            ],
-        },
-    ],
 };
 
 export default class JustForKix extends Component {
