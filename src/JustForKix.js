@@ -6,6 +6,8 @@ import LoggedInBottomContent from './LoggedInBottomContent';
 import LoggedOutBottomContent from './LoggedOutBottomContent';
 import initialState from './initial-state';
 
+import { GameImage } from './constants';
+
 const superMarioImage = require('./img/smb.jpg');
 
 const styles = {
@@ -120,7 +122,7 @@ export default class JustForKix extends Component {
         styleOne.height = this.state.bottomVisible ? '0' : '90vh';
         styleOne.overflow = this.state.bottomVisible ? 'hidden' : 'default';
 
-        styleOne.backgroundImage = `url(${superMarioImage})`;
+        styleOne.backgroundImage = `url(${GameImage.get(this.state.activeGame)})`;
         styleOne.backgroundSize = 'cover';
         styleOne.backgroundPosition = 'center bottom';
 

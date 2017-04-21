@@ -5,6 +5,7 @@ const initialState = {
     ageChosen: false,
     mode: 'none',
     bottomVisible: false,
+    activeGame: Game.One,
     currentGamesList: [],
     lists: [
         {
