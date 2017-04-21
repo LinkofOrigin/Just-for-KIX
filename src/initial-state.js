@@ -5,7 +5,7 @@ const initialState = {
     ageChosen: false,
     mode: 'none',
     bottomVisible: false,
-    activeGames: [],
+    currentGamesList: [],
     lists: [
         {
             name: 'Young',

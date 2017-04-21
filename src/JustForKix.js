@@ -48,7 +48,7 @@ export default class JustForKix extends Component {
     handleLogin = () => this.setState({
         loggedIn: true,
         mode: 'adult',
-        activeGames: [],
+        currentGamesList: [],
     });
     handleLogout = () => this.setState({
         loggedIn: false,
@@ -79,7 +79,7 @@ export default class JustForKix extends Component {
         this.setState(
             {
                 ageChosen: true,
-                activeGames: list.games,
+                currentGamesList: list.games,
             },
         );
     };
@@ -159,7 +159,7 @@ export default class JustForKix extends Component {
             );
         }
 
-        let activeGames = this.state.activeGames;
+        let activeGames = this.state.currentGamesList;
         if (this.state.mode === 'adult') {
             activeGames = [];
         }
