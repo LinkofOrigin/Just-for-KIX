@@ -153,6 +153,13 @@ export default class LoggedInBottomContent extends Component {
                         />,
                     )
                 }
+                <GamesList
+                    title = 'Inactive Games'
+                    list = { this.props.inactiveGames }
+                    listName = 'Inactive Games'
+                    editable = { true }
+                    handleAddGame = { this.props.handleAddGame }
+                />
             </div>
         );
     }
@@ -160,6 +167,7 @@ export default class LoggedInBottomContent extends Component {
 
 LoggedInBottomContent.propTypes = {
     lists: PropTypes.array.isRequired,
+    inactiveGames: PropTypes.array.isRequired,
     handleLogout: PropTypes.func.isRequired,
     handleModeSwitch: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,

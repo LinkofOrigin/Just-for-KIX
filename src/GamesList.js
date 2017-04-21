@@ -32,7 +32,6 @@ const h3Style = {
     display: 'inline-block',
     margin: '0 0 10px 0',
     paddingRight: '10px',
-    cursor: 'pointer',
 };
 
 const editStyle = {
@@ -110,20 +109,23 @@ export default class GamesList extends Component {
     };
 
     render() {
+        const editableH3Style = Object.assign({}, h3Style);
+        editableH3Style.cursor = 'pointer';
+
         let listTitle;
         if (this.props.title) {
             if (this.props.editable) {
                 listTitle = (
                     <h3
                         onClick = { this.handleEditing }
-                        style = { h3Style }
+                        style = { editableH3Style }
                     >
                         <Edit style = { editStyle } />{ this.props.title }
                     </h3>);
             } else {
                 listTitle = (
                     <h3 style = { h3Style }>
-                        <Edit style = { editStyle } />{ this.props.title }
+                        { this.props.title }
                     </h3>);
             }
         }
