@@ -45,6 +45,8 @@ export default class LoggedOutBottomContent extends Component {
         this.state = initialState;
     }
 
+    componentDidUpdate = () => this.refs.usernameInput.focus();
+
     handleFormSubmit = (e) => {
         e.preventDefault();
         this.handleLoginClick();
@@ -92,6 +94,7 @@ export default class LoggedOutBottomContent extends Component {
                         <p style = { loginStyle }>Just for KIX</p>
                         <div style = { inputWrapStyle }>
                             <TextField
+                                ref = { 'usernameInput' }
                                 floatingLabelText = 'Username'
                                 value = { this.state.usernameValue }
                                 onChange = { this.handleUsernameChange }
