@@ -57,11 +57,10 @@ const titleTextStyle = {
 };
 
 const listRemovalContStyle = {
-    display: 'inline-block',
-    height: '0',
+    display: 'none',
     marginLeft: '10px',
-    color: 'red',
-    fontWeight: 'bold',
+    color: 'white',
+    // fontWeight: 'bold',
 };
 
 const initialState = {
@@ -138,7 +137,7 @@ export default class GamesList extends Component {
     render() {
         const listRemovalStyle = Object.assign({}, listRemovalContStyle);
         if (this.state.removing) {
-            listRemovalStyle.height = 'auto';
+            listRemovalStyle.display = 'inline-block';
         }
 
         let listTitle;
@@ -162,10 +161,14 @@ export default class GamesList extends Component {
                             <RaisedButton
                                 label = 'Cancel'
                                 onClick = { this.handleRemoveClick }
+                                style = { { marginLeft: '10px' } }
                             />
                             <RaisedButton
                                 label = 'Delete'
+                                labelColor = 'white'
                                 onClick = { this.handleDeleteList }
+                                style = { { marginLeft: '10px' } }
+                                overlayStyle = { { backgroundColor: '#d80027' } }
                             />
                         </div>
                     </div>);
