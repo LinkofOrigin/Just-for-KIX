@@ -99,6 +99,18 @@ export default class LoggedInBottomContent extends Component {
         return (
             <div style = { styles.root }>
                 <div style = { styles.tooltipStyle }>Click and drag games to organize lists</div>
+                <div style = { styles.buttonConStyle }>
+                    <RaisedButton
+                        label = 'Switch to Child Mode'
+                        style = { styles.buttonStyle }
+                        onClick = { this.props.handleModeSwitch }
+                    />
+                    <RaisedButton
+                        label = 'Log Out'
+                        style = { styles.buttonStyle }
+                        onClick = { this.props.handleLogout }
+                    />
+                </div>
                 <RaisedButton
                     label = 'Add a List'
                     labelColor = 'white'
@@ -137,21 +149,10 @@ export default class LoggedInBottomContent extends Component {
                             editable
                             handleAddGame = { this.props.handleAddGame }
                             handleTitleEdit = { this.props.handleTitleEdit }
+                            handleDeleteList = { this.props.handleDeleteList }
                         />,
                     )
                 }
-                <div style = { styles.buttonConStyle }>
-                    <RaisedButton
-                        label = 'Switch to Child Mode'
-                        style = { styles.buttonStyle }
-                        onClick = { this.props.handleModeSwitch }
-                    />
-                    <RaisedButton
-                        label = 'Log Out'
-                        style = { styles.buttonStyle }
-                        onClick = { this.props.handleLogout }
-                    />
-                </div>
             </div>
         );
     }
@@ -164,4 +165,5 @@ LoggedInBottomContent.propTypes = {
     handleAddGame: PropTypes.func.isRequired,
     handleTitleEdit: PropTypes.func,
     handleAddList: PropTypes.func,
+    handleDeleteList: PropTypes.func,
 };

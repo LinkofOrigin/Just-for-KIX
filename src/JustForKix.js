@@ -126,6 +126,14 @@ export default class JustForKix extends Component {
         return true;
     };
 
+    handleDeleteList = (name) => {
+        const newState = {};
+        newState.lists = this.state.lists;
+        const listToDelete = this.getListIndex(name);
+        delete newState.lists[listToDelete];
+        this.setState(newState);
+    };
+
     render() {
         const styleOne = Object.assign({}, styles.bottom);
         styleOne.height = this.state.bottomVisible ? '0' : '90vh';
@@ -159,6 +167,7 @@ export default class JustForKix extends Component {
                     handleModeSwitch = { this.handleModeSwitch }
                     handleTitleEdit = { this.handleTitleEdit }
                     handleAddList = { this.handleAddList }
+                    handleDeleteList = { this.handleDeleteList }
                 />
             );
         } else {

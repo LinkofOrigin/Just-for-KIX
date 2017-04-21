@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Edit from 'material-ui/svg-icons/image/edit';
+import Remove from 'material-ui/svg-icons/content/remove-circle';
 import GameIcon from './GameIcon';
 
 import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
@@ -41,10 +42,26 @@ const editStyle = {
     top: '5px',
 };
 
+const removeStyle = {
+    marginLeft: '10px',
+    position: 'relative',
+    top: '5px',
+    clear: 'none',
+    cursor: 'pointer',
+};
+
 const titleTextStyle = {
     display: 'inline-block',
     marginRight: '20px',
     marginBottom: '10px',
+};
+
+const listRemovalContStyle = {
+    display: 'inline-block',
+    height: '0',
+    marginLeft: '10px',
+    color: 'red',
+    fontWeight: 'bold',
 };
 
 const initialState = {
@@ -52,6 +69,7 @@ const initialState = {
     editing: false,
     title: '',
     error: false,
+    removing: false,
 };
 
 export default class GamesList extends Component {
@@ -109,21 +127,52 @@ export default class GamesList extends Component {
         );
     };
 
+    handleRemoveClick = () => {
+        this.setState({ removing: !this.state.removing });
+    };
+
+    handleDeleteList = () => {
+        this.props.handleDeleteList(this.props.title);
+    };
+
     render() {
+        const listRemovalStyle = Object.assign({}, listRemovalContStyle);
+        if (this.state.removing) {
+            listRemovalStyle.height = 'auto';
+        }
+
         let listTitle;
         if (this.props.title) {
             if (this.props.editable) {
                 listTitle = (
-                    <h3
-                        onClick = { this.handleEditing }
-                        style = { h3Style }
-                    >
-                        <Edit style = { editStyle } />{ this.props.title }
-                    </h3>);
+                    <div>
+                        <h3
+                            onClick = { this.handleEditing }
+                            style = { h3Style }
+                        >
+                            <Edit style = { editStyle } />
+                            { this.props.title }
+                        </h3>
+                        <Remove
+                            onClick = { this.handleRemoveClick }
+                            style = { removeStyle }
+                        />
+                        <div style = { listRemovalStyle } >
+                            Delete this list?
+                            <RaisedButton
+                                label = 'Cancel'
+                                onClick = { this.handleRemoveClick }
+                            />
+                            <RaisedButton
+                                label = 'Delete'
+                                onClick = { this.handleDeleteList }
+                            />
+                        </div>
+                    </div>);
             } else {
                 listTitle = (
                     <h3 style = { h3Style }>
-                        <Edit style = { editStyle } />{ this.props.title }
+                        { this.props.title }
                     </h3>);
             }
         }
@@ -200,4 +249,5 @@ GamesList.propTypes = {
     editable: PropTypes.bool.isRequired,
     handleAddGame: PropTypes.func.isRequired,
     handleTitleEdit: PropTypes.func,
+    handleDeleteList: PropTypes.func,
 };
