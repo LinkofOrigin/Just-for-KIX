@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import GameIcon from './GameIcon';
+import Edit from 'material-ui/svg-icons/image/edit';
 
 import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
 
@@ -13,16 +16,42 @@ const defaultStyle = {
     margin: gameIconMarginVH,
 };
 
-const h3Style = {
-    margin: '0 0 10px 0',
+const titleFormStyle = {
+    display: 'inline-block',
+    backgroundColor: 'white',
+    padding: '0 15px 15px 15px',
+    borderRadius: '10px',
 };
 
-const initialState = 
-    {
-        hover: false,
-        editing: false,
-        title: "",
-    };
+const titleSaveButtonStyle = {
+    position: 'relative',
+    top: '50%',
+        
+};
+
+const h3Style = {
+    margin: '0 0 10px 0',
+    cursor: 'pointer',
+};
+
+const editStyle = {
+    marginRight: '5px',
+    position: 'relative',
+    top: '5px',
+};
+
+const titleTextStyle = {
+    display: 'inline-block',
+    marginRight: '20px',
+    marginBottom: '10px',
+};
+
+const initialState = {
+    hover: false,
+    editing: false,
+    title: "",
+    error: false,
+};
 
 export default class GamesList extends Component {
     constructor() {
@@ -50,29 +79,44 @@ export default class GamesList extends Component {
     
     handleTitleEdit = (e) => {
         e.preventDefault();
-        let newName = document.getElementById(this.props.title).innerHTML;
-        this.setState({editing: false});
-        this.props.handleTitleEdit(this.props.title, newName);
+        let newName = this.state.title;
+        let success = this.props.handleTitleEdit(this.props.title, newName);
+        if(success) {
+            this.setState({editing: false});
+        } else {
+            this.setState({
+                error: "A list with that name already exists! List names must be unique.",
+            });
+        }
+        
     };
     
     handleTitleChange = (e) => {
-        this.setState({ title: e.target.value });
+        this.setState({
+            title: e.target.value,
+            error: false,
+        });
     };
     
     handleEditing = () => {
         this.setState({
             editing: true,
             title: this.props.title,
-        });
+        }, 
+            () => {
+                this.refs.listTitle.focus();
+            }
+        );
+        
     };
     
     render() {
         let listTitle;
         if (this.props.title) {
             if(this.props.editable) {
-                listTitle = <h3 onClick = { this.handleEditing } style = { h3Style }>{ this.props.title }</h3>;
+                listTitle = <h3 onClick = { this.handleEditing } style = { h3Style }><Edit style = { editStyle } />{ this.props.title }</h3>;
             } else {
-                listTitle = <h3 style = { h3Style }>{ this.props.title }</h3>;
+                listTitle = <h3 style = { h3Style }><Edit style = { editStyle } />{ this.props.title }</h3>;
             }
                     
         }
@@ -90,16 +134,25 @@ export default class GamesList extends Component {
             
             if(this.state.editing) {
                 titleContent =
-                    <form onSubmit = { this.handleTitleEdit }>
-                        <input
-                            id = { this.props.title }
-                            placeholder = "List Title"
+                    <form style = { titleFormStyle } onSubmit = { this.handleTitleEdit }>
+                        <TextField
+                            floatingLabelText = 'List Title'
+                            hintText = 'List Title'
+                            ref = { "listTitle" }
                             value = { this.state.title }
-                            onChange = { this.handleTitleChange } />
-                        <button type = "submit">Save</button>
+                            errorText = { this.state.error }
+                            onChange = { this.handleTitleChange }
+                            style = { titleTextStyle }
+                        />
+                        <br/>
+                        <RaisedButton
+                            style = { titleSaveButtonStyle }
+                            label = 'Save'
+                            type = 'submit'
+                        />
                     </form>;
             }
-        }
+    }
 
         if (this.state.hover) {
             style.backgroundColor = 'gray';

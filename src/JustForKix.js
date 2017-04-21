@@ -113,9 +113,19 @@ export default class JustForKix extends Component {
     handleTitleEdit = (oldName, newName) => {
         let newState = {};
         newState.lists = this.state.lists;
-        let listInd = this.getListIndex(oldName);
-        newState.lists[listInd].name = newName;
-        this.setState(newState);
+        
+        let oldList = this.getListIndex(oldName);
+        let newList = this.getListIndex(newName);
+        console.log(oldList);
+        console.log(newList);
+        if(newList > -1 && oldList !== newList) {
+            console.log("error!!!!");
+            return false;
+        } else {
+            newState.lists[oldList].name = newName;
+            this.setState(newState);
+        }
+        return true;
     };
     
     getList = (name) => {
