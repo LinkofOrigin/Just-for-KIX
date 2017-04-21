@@ -22,7 +22,7 @@ function dragStart(event) {
     event.dataTransfer.setData('game-id', event.target.id);
 }
 
-const GameIcon = ({ fromListName, name }) => {
+const GameIcon = ({ fromListName, name, onClick }) => {
     const iconStyle = Object.assign({}, style);
     iconStyle.backgroundImage = `url(${GameImage.get(name)})`;
 
@@ -33,6 +33,7 @@ const GameIcon = ({ fromListName, name }) => {
             onDragStart = { dragStart }
             style = { iconStyle }
             data-tag = { fromListName }
+            onClick = { onClick }
         />
     );
 };
@@ -40,6 +41,7 @@ const GameIcon = ({ fromListName, name }) => {
 GameIcon.propTypes = {
     fromListName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default GameIcon;

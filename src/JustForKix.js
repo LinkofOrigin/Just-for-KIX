@@ -39,6 +39,12 @@ export default class JustForKix extends Component {
         });
     };
 
+    handleChangeActiveGame = (newGame) => {
+        this.setState({
+            activeGame: newGame,
+        });
+    };
+
     handleClickIcon = () => {
         // similar to this.state.bottomVisible = !this.state.bottomVisible;
         // but modifying state with this method causes component to re-render.
@@ -193,6 +199,7 @@ export default class JustForKix extends Component {
                     list = { activeGames }
                     onClickIcon = { this.handleClickIcon }
                     handleAddGame = { this.handleAddGame }
+                    onChangeActiveGame = { this.handleChangeActiveGame }
                 />
                 <div style = { styleOne }>
                     { topContent }

@@ -134,6 +134,13 @@ export default class GamesList extends Component {
         this.props.handleDeleteList(this.props.title);
     };
 
+    handleClickGame = (event) => {
+        console.log('handleClickGame');
+        if (this.props.onClickGame) {
+            this.props.onClickGame(event.target.id);
+        }
+    };
+
     render() {
         const listRemovalStyle = Object.assign({}, listRemovalContStyle);
         if (this.state.removing) {
@@ -233,8 +240,10 @@ export default class GamesList extends Component {
                             return (
                                 <GameIcon
                                     key = { game + index }
+                                    id = { game }
                                     name = { game }
                                     fromListName = { this.props.listName }
+                                    onClick = { this.handleClickGame }
                                 />
                             );
                         })
@@ -253,4 +262,5 @@ GamesList.propTypes = {
     handleAddGame: PropTypes.func.isRequired,
     handleTitleEdit: PropTypes.func,
     handleDeleteList: PropTypes.func,
+    onClickGame: PropTypes.func,
 };

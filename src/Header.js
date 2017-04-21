@@ -45,6 +45,7 @@ export default class Header extends Component {
                     listName = 'activeGames'
                     editable = { false }
                     handleAddGame = { this.props.handleAddGame }
+                    onClickGame = { this.props.onChangeActiveGame }
                 />
                 <IconButton
                     style = { styles.icon }
@@ -65,4 +66,5 @@ Header.propTypes = {
     list: PropTypes.array.isRequired,
     onClickIcon: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,
+    onChangeActiveGame: PropTypes.func.isRequired,
 };
