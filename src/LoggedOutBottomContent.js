@@ -45,7 +45,11 @@ export default class LoggedOutBottomContent extends Component {
         this.state = initialState;
     }
 
-    componentDidUpdate = () => this.refs.usernameInput.focus();
+    componentDidUpdate = () => {
+        // not ready for primetime!
+        // ends up focusing on username even if we are typing in password field.
+        // this.refs.usernameInput.focus();
+    };
 
     handleFormSubmit = (e) => {
         e.preventDefault();
