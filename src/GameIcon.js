@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
-import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
+import { gameIconMarginVH, gameIconSideLengthVH, GameImage } from './constants';
 
 const style = {
     margin: `${gameIconMarginVH}vh`,
     marginRight: 0,
     display: 'inline-block',
-    backgroundColor: '#333',
+    backgroundSize: 'cover',
     color: '#fff',
     width: `${gameIconSideLengthVH}vh`,
     height: `${gameIconSideLengthVH}vh`,
@@ -23,16 +23,17 @@ function dragStart(event) {
 }
 
 const GameIcon = ({ fromListName, name }) => {
+    const iconStyle = Object.assign({}, style);
+    iconStyle.backgroundImage = `url(${GameImage.get(name)})`;
+
     return (
         <div
             id = { name }
             draggable = 'true'
             onDragStart = { dragStart }
-            style = { style }
+            style = { iconStyle }
             data-tag = { fromListName }
-        >
-            { name }
-        </div>
+        />
     );
 };
 
