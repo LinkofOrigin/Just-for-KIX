@@ -104,6 +104,7 @@ export default class LoggedInBottomContent extends Component {
                     <RaisedButton
                         label = 'Switch to Child Mode'
                         style = { styles.buttonStyle }
+                        overlayStyle = { { backgroundColor: this.props.childColor } }
                         onClick = { this.props.handleModeSwitch }
                     />
                     <RaisedButton
@@ -136,7 +137,7 @@ export default class LoggedInBottomContent extends Component {
                         <RaisedButton
                             style = { styles.titleSaveButtonStyle }
                             label = 'Save'
-                            type = 'submit'
+                            onClick = { this.handleCancelTitleEdit }
                         />
                     </form>
                 </div>
@@ -175,6 +176,7 @@ export default class LoggedInBottomContent extends Component {
 
 LoggedInBottomContent.propTypes = {
     lists: PropTypes.array.isRequired,
+    childColor: PropTypes.string.isRequired,
     handleLogout: PropTypes.func.isRequired,
     handleModeSwitch: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,

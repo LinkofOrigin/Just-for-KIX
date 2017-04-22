@@ -24,9 +24,8 @@ const titleFormStyle = {
     borderRadius: '10px',
 };
 
-const titleSaveButtonStyle = {
-    position: 'relative',
-    top: '50%',
+const titleButtonStyle = {
+    marginRight: '15px',
 };
 
 const h3Style = {
@@ -123,6 +122,13 @@ export default class GamesList extends Component {
             },
         );
     };
+    
+    handleCancelTitleEdit = () => {
+        this.setState({
+            editing: false,
+            title: this.props.title,
+        });
+    };
 
     handleRemoveClick = () => {
         this.setState({ removing: !this.state.removing });
@@ -213,8 +219,14 @@ export default class GamesList extends Component {
                         />
                         <br />
                         <RaisedButton
-                            style = { titleSaveButtonStyle }
+                            style = { titleButtonStyle }
+                            label = 'Cancel'
+                            onClick = { this.handleCancelTitleEdit }
+                        />
+                        <RaisedButton
                             label = 'Save'
+                            labelColor = 'white'
+                            overlayStyle = { {backgroundColor: '#0d0d96'} }
                             type = 'submit'
                         />
                     </form>);

@@ -172,6 +172,7 @@ export default class JustForKix extends Component {
             bottomContent = (
                 <LoggedInBottomContent
                     lists = { this.state.lists }
+                    childColor = { childColor }
                     handleLogout = { this.handleLogout }
                     handleAddGame = { this.handleAddGame }
                     handleModeSwitch = { this.handleModeSwitch }
