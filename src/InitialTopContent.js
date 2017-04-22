@@ -36,7 +36,7 @@ export default class InitialTopContent extends Component {
                 <div style = { styles.boxContStyle }>
                     {
                         this.props.lists.map((list, index) => {
-                            if (list.name !== 'Inactive Games') {
+                            if (index !== 0) {
                                 return (
                                     <div
                                         key = { list.name + index }
@@ -59,4 +59,5 @@ export default class InitialTopContent extends Component {
 
 InitialTopContent.propTypes = {
     listHandle: PropTypes.func.isRequired,
+    lists: PropTypes.array.isRequired,
 };

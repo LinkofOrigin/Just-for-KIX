@@ -142,34 +142,32 @@ export default class LoggedInBottomContent extends Component {
                 </div>
                 {
                     this.props.lists.map((list, index) => {
-                        if (list.name === 'Inactive Games') {
+                        if (index !== 0) {
                             return (
                                 <GamesList
                                     key = { list.name + index }
                                     title = { list.name }
                                     list = { list.games }
                                     listName = { list.name }
-                                    inactive
                                     editable
                                     handleAddGame = { this.props.handleAddGame }
                                     handleTitleEdit = { this.props.handleTitleEdit }
                                     handleDeleteList = { this.props.handleDeleteList }
                                 />);
                         }
-                        return (
-                            <GamesList
-                                key = { list.name + index }
-                                title = { list.name }
-                                list = { list.games }
-                                listName = { list.name }
-                                editable
-                                handleAddGame = { this.props.handleAddGame }
-                                handleTitleEdit = { this.props.handleTitleEdit }
-                                handleDeleteList = { this.props.handleDeleteList }
-                            />);
                     },
                     )
                 }
+                <GamesList
+                    title = { this.props.lists[0].name }
+                    list = { this.props.lists[0].games }
+                    listName = { this.props.lists[0].name }
+                    inactive
+                    editable
+                    handleAddGame = { this.props.handleAddGame }
+                    handleTitleEdit = { this.props.handleTitleEdit }
+                    handleDeleteList = { this.props.handleDeleteList }
+                />
             </div>
         );
     }

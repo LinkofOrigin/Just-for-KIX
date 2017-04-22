@@ -114,19 +114,21 @@ export default class GamesList extends Component {
 
         let listTitle;
         if (this.props.title) {
-            if (this.props.editable) {
+            if (this.props.editable && !this.props.inactive) {
                 listTitle = (
                     <h3
                         onClick = { this.handleEditing }
                         style = { editableH3Style }
                     >
                         <Edit style = { editStyle } />{ this.props.title }
-                    </h3>);
+                    </h3>
+                );
             } else {
                 listTitle = (
                     <h3 style = { h3Style }>
                         { this.props.title }
-                    </h3>);
+                    </h3>
+                );
             }
         }
 

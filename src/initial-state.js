@@ -9,6 +9,22 @@ const initialState = {
     currentGamesList: [],
     lists: [
         {
+            name: 'Inactive Games',
+            games: [
+                Game.Seven,
+                Game.Eight,
+                Game.Nine,
+                Game.Ten,
+                Game.Eleven,
+                Game.Twelve,
+                Game.Thirteen,
+                Game.Fourteen,
+                Game.Fifteen,
+                Game.Sixteen,
+                Game.Seventeen,
+            ],
+        },
+        {
             name: 'Young',
             games: [
                 Game.One,
@@ -27,22 +43,6 @@ const initialState = {
             games: [
                 Game.Five,
                 Game.Six,
-            ],
-        },
-        {
-            name: 'Inactive Games',
-            games: [
-                Game.Seven,
-                Game.Eight,
-                Game.Nine,
-                Game.Ten,
-                Game.Eleven,
-                Game.Twelve,
-                Game.Thirteen,
-                Game.Fourteen,
-                Game.Fifteen,
-                Game.Sixteen,
-                Game.Seventeen,
             ],
         },
     ],
