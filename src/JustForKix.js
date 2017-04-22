@@ -201,7 +201,7 @@ export default class JustForKix extends Component {
             activeGames = [];
         }
 
-        const showSwitchGamesButton = !this.state.loggedIn && this.state.activeGame !== undefined;
+        const showSwitchGamesButton = this.state.mode !== 'adult' && this.state.activeGame !== undefined;
 
         return (
             <div style = { { overflow: 'hidden' } }>
