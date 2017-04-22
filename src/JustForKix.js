@@ -81,11 +81,13 @@ export default class JustForKix extends Component {
     };
 
     handleListSelection = (listName) => {
-        const list = this.getList(listName);
+        const gamesList = this.getList(listName).games;
+
         this.setState(
             {
+                activeGame: gamesList.length > 0 ? gamesList[0] : undefined,
                 showGameSelection: false,
-                currentGamesList: list.games,
+                currentGamesList: gamesList,
             },
         );
     };
