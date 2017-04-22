@@ -39,12 +39,21 @@ export default class Header extends Component {
         const iconStyle = Object.assign({}, styles.defaultIconStyle);
         iconStyle.color = this.props.open ? grey600 : grey800;
 
+        const headerStyle = Object.assign({}, styles.top);
+        if (this.props.loggedIn) {
+            if (this.props.mode === 'adult') {
+                headerStyle.backgroundColor = '#2150B5';
+            } else {
+                headerStyle.backgroundColor = '#3BED50';
+            }
+        }
+
         if (this.props.loggedIn && this.props.open) {
             iconStyle.transform = 'rotate(90deg)';
         }
 
         return (
-            <div style = { styles.top }>
+            <div style = { headerStyle }>
                 <GamesList
                     list = { this.props.list }
                     listName = 'activeGames'
@@ -73,6 +82,7 @@ export default class Header extends Component {
 Header.propTypes = {
     open: PropTypes.bool.isRequired,
     loggedIn: PropTypes.bool.isRequired,
+    mode: PropTypes.string.isRequired,
     list: PropTypes.array.isRequired,
     onClickIcon: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,

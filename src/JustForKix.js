@@ -201,6 +201,7 @@ export default class JustForKix extends Component {
                 <Header
                     open = { this.state.bottomVisible }
                     loggedIn = { this.state.loggedIn }
+                    mode = { this.state.mode }
                     list = { activeGames }
                     onClickIcon = { this.handleClickIcon }
                     handleAddGame = { this.handleAddGame }
