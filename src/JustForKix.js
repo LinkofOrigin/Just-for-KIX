@@ -103,15 +103,17 @@ export default class JustForKix extends Component {
         }
     };
 
-    handleListChange = () => {
-        let showGameSelection = !this.state.showGameSelection;
-        if (this.state.bottomVisible) {
-            showGameSelection = true;
-        }
-
+    handleShowLists = () => {
         this.setState({
-            showGameSelection,
+            showGameSelection: true,
             bottomVisible: false,
+        });
+    };
+
+    handleHideLists = () => {
+        this.setState({
+            showGameSelection: false,
+            // bottomVisible: true,
         });
     };
 
@@ -209,11 +211,12 @@ export default class JustForKix extends Component {
                     adultColor = { adultColor }
                     childColor = { childColor }
                     list = { activeGames }
-                    onClickIcon = { this.handleClickIcon }
                     handleAddGame = { this.handleAddGame }
                     onChangeActiveGame = { this.handleChangeActiveGame }
-                    handleListChange = { this.handleListChange }
-                    showSwitchGamesButton = { showSwitchGamesButton }
+                    showListSelectionButton= { showSwitchGamesButton }
+                    onShowLists = { this.handleShowLists }
+                    onHideLists = { this.handleHideLists }
+                    onClickIcon = { this.handleClickIcon }
                 />
                 <div style = { styleOne }>
                     <InitialTopContent
