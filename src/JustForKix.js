@@ -136,6 +136,8 @@ export default class JustForKix extends Component {
         const newState = {};
         newState.lists = this.state.lists;
         const listToDelete = this.getListIndex(name);
+        newState.lists[0].games =
+            newState.lists[0].games.concat(newState.lists[listToDelete].games);
         newState.lists.splice(listToDelete, 1);
         this.setState(newState);
     };
