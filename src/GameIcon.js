@@ -6,6 +6,7 @@ const style = {
     margin: `${gameIconMarginVH}vh`,
     marginRight: 0,
     display: 'inline-block',
+    borderRadius: '100%',
     backgroundSize: 'cover',
     color: '#fff',
     width: `${gameIconSideLengthVH}vh`,

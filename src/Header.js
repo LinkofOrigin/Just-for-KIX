@@ -88,7 +88,6 @@ Header.propTypes = {
     loggedIn: PropTypes.bool.isRequired,
     mode: PropTypes.string.isRequired,
     adultColor: PropTypes.string.isRequired,
-    childColor: PropTypes.string.isRequired,
     list: PropTypes.array.isRequired,
     onClickIcon: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,
