@@ -61,11 +61,15 @@ export default class Header extends Component {
                     handleAddGame = { this.props.handleAddGame }
                     onClickGame = { this.props.onChangeActiveGame }
                 />
-                <RaisedButton
-                    style = { styles.listChangeButton }
-                    label = 'Switch Games'
-                    onClick = { this.props.handleListChange }
-                />
+                {
+                    this.props.showSwitchGamesButton
+                        ? <RaisedButton
+                            style = { styles.listChangeButton }
+                            label = 'Switch Games'
+                            onClick = { this.props.handleListChange }
+                        />
+                        : null
+                }
                 <IconButton
                     style = { styles.icon }
                     onClick = { this.props.onClickIcon }
@@ -88,4 +92,5 @@ Header.propTypes = {
     handleAddGame: PropTypes.func.isRequired,
     onChangeActiveGame: PropTypes.func.isRequired,
     handleListChange: PropTypes.func.isRequired,
+    showSwitchGamesButton: PropTypes.bool.isRequired,
 };

@@ -196,6 +196,8 @@ export default class JustForKix extends Component {
             activeGames = [];
         }
 
+        const showSwitchGamesButton = !this.state.loggedIn && this.state.activeGame !== undefined;
+
         return (
             <div style = { { overflow: 'hidden' } }>
                 <Header
@@ -207,6 +209,7 @@ export default class JustForKix extends Component {
                     handleAddGame = { this.handleAddGame }
                     onChangeActiveGame = { this.handleChangeActiveGame }
                     handleListChange = { this.handleListChange }
+                    showSwitchGamesButton = { showSwitchGamesButton }
                 />
                 <div style = { styleOne }>
                     { topContent }
