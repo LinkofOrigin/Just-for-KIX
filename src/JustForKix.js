@@ -104,8 +104,13 @@ export default class JustForKix extends Component {
     };
 
     handleListChange = () => {
+        let showGameSelection = !this.state.showGameSelection;
+        if (this.state.bottomVisible) {
+            showGameSelection = true;
+        }
+
         this.setState({
-            showGameSelection: !this.state.showGameSelection,
+            showGameSelection,
             bottomVisible: false,
         });
     };
