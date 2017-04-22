@@ -43,7 +43,7 @@ export default class Header extends Component {
         if (this.props.loggedIn) {
             if (this.props.mode === 'adult') {
                 headerStyle.backgroundColor = '#2150B5';
-            } else {
+            } else if(this.props.mode === 'child') {
                 headerStyle.backgroundColor = '#3BED50';
             }
         }
@@ -87,6 +87,8 @@ Header.propTypes = {
     open: PropTypes.bool.isRequired,
     loggedIn: PropTypes.bool.isRequired,
     mode: PropTypes.string.isRequired,
+    adultColor: PropTypes.string.isRequired,
+    childColor: PropTypes.string.isRequired,
     list: PropTypes.array.isRequired,
     onClickIcon: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,

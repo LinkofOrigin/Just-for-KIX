@@ -8,6 +8,9 @@ import initialState from './initial-state';
 
 import { GameImage } from './constants';
 
+const adultColor = '#2150B5';
+const childColor = '#3BED50';
+
 const styles = {
     bottom: {
         height: '90vh',
@@ -186,6 +189,8 @@ export default class JustForKix extends Component {
             bottomContent = (
                 <LoggedOutBottomContent
                     mode = { this.state.mode }
+                    adultColor = { adultColor }
+                    childColor = { childColor }
                     handleLogin = { this.handleLogin }
                 />
             );
@@ -204,6 +209,8 @@ export default class JustForKix extends Component {
                     open = { this.state.bottomVisible }
                     loggedIn = { this.state.loggedIn }
                     mode = { this.state.mode }
+                    adultColor = { adultColor }
+                    childColor = { childColor }
                     list = { activeGames }
                     onClickIcon = { this.handleClickIcon }
                     handleAddGame = { this.handleAddGame }
