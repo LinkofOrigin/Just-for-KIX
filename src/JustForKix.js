@@ -167,16 +167,6 @@ export default class JustForKix extends Component {
         styleTwo.height = this.state.bottomVisible ? '90vh' : '0';
         styleTwo.overflow = this.state.bottomVisible ? 'default' : 'hidden';
 
-        let topContent;
-        if (this.state.showGameSelection) {
-            topContent = (
-                <InitialTopContent
-                    listHandle = { this.handleListSelection }
-                    lists = { this.state.lists }
-                />
-            );
-        }
-
         let bottomContent;
         if (this.state.loggedIn && this.state.mode === 'adult') {
             bottomContent = (
@@ -211,7 +201,8 @@ export default class JustForKix extends Component {
         return (
             <div style = { { overflow: 'hidden' } }>
                 <Header
-                    open = { this.state.bottomVisible }
+                    listSelectionOpen = { this.state.showGameSelection }
+                    bottomContentOpen = { this.state.bottomVisible }
                     loggedIn = { this.state.loggedIn }
                     mode = { this.state.mode }
                     adultColor = { adultColor }
@@ -224,7 +215,11 @@ export default class JustForKix extends Component {
                     showSwitchGamesButton = { showSwitchGamesButton }
                 />
                 <div style = { styleOne }>
-                    { topContent }
+                    <InitialTopContent
+                        listHandle = { this.handleListSelection }
+                        lists = { this.state.lists }
+                        style = { { opacity: this.state.showGameSelection ? 1 : 0} }
+                    />
                 </div>
                 <div style = { styleTwo }>
                     { bottomContent }

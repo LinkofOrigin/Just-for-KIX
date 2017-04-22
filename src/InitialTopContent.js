@@ -4,6 +4,7 @@ import { gameListIconMarginVH, gameListIconSideLengthVH } from './constants';
 
 const styles = {
     ageChoiceStyle: {
+        transition: 'all 0.5s ease',
         backgroundColor: 'rgba(0,0,0,0.8)',
         width: '100%',
         height: '100%',
@@ -33,8 +34,9 @@ export default class InitialTopContent extends Component {
     };
 
     render() {
+        const style = Object.assign({}, styles.ageChoiceStyle, this.props.style);
         return (
-            <div style = { styles.ageChoiceStyle }>
+            <div style = { style }>
                 <div style = { styles.boxContStyle }>
                     {
                         this.props.lists.map((list, index) => {
