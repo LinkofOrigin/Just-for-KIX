@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
 import { grey600, grey800 } from 'material-ui/styles/colors';
+import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import Settings from 'material-ui/svg-icons/action/settings';
 import Person from 'material-ui/svg-icons/social/person-outline';
 import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
 import GamesList from './GamesList';
-
 
 const styles = {
     icon: {
@@ -14,6 +14,11 @@ const styles = {
         height: `${gameIconSideLengthVH}vh`,
         position: 'absolute',
         right: `${gameIconMarginVH}vh`,
+        top: `${gameIconMarginVH}vh`,
+    },
+    listChangeButton: {
+        position: 'absolute',
+        right: `${gameIconSideLengthVH + (2 * gameIconMarginVH)}vh`,
         top: `${gameIconMarginVH}vh`,
     },
     defaultIconStyle: {
@@ -47,6 +52,11 @@ export default class Header extends Component {
                     handleAddGame = { this.props.handleAddGame }
                     onClickGame = { this.props.onChangeActiveGame }
                 />
+                <RaisedButton
+                    style = { styles.listChangeButton }
+                    label = 'Switch Games'
+                    onClick = { this.props.handleListChange }
+                />
                 <IconButton
                     style = { styles.icon }
                     onClick = { this.props.onClickIcon }
@@ -67,4 +77,5 @@ Header.propTypes = {
     onClickIcon: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,
     onChangeActiveGame: PropTypes.func.isRequired,
+    handleListChange: PropTypes.func.isRequired,
 };

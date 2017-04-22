@@ -2,7 +2,7 @@ import { Game } from './constants';
 
 const initialState = {
     loggedIn: false,
-    ageChosen: false,
+    showGameSelection: true,
     mode: 'none',
     bottomVisible: false,
     activeGame: Game.One,

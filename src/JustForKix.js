@@ -59,7 +59,7 @@ export default class JustForKix extends Component {
     handleLogout = () => this.setState({
         loggedIn: false,
         mode: 'none',
-        ageChosen: false,
+        showGameSelection: true,
     });
 
     handleAddGame = (fromListName, toListName, gameId) => {
@@ -84,7 +84,7 @@ export default class JustForKix extends Component {
         const list = this.getList(listName);
         this.setState(
             {
-                ageChosen: true,
+                showGameSelection: false,
                 currentGamesList: list.games,
             },
         );
@@ -92,16 +92,21 @@ export default class JustForKix extends Component {
 
     handleModeSwitch = () => {
         if (this.state.mode === 'adult') {
-            this.setState({ mode: 'child', ageChosen: false, bottomVisible: false });
+            this.setState({ mode: 'child', showGameSelection: true, bottomVisible: false });
         } else if (this.state.mode === 'child') {
             this.setState({ mode: 'adult' });
         }
     };
 
-    handleListChange = () => this.setState({
-        ageChosen: false,
-        bottomVisible: false,
-    });
+    handleListChange = () => {
+        const showGameSelection = !this.state.showGameSelection;
+        let bottomVisible = false;
+
+        this.setState({
+            showGameSelection,
+            bottomVisible,
+        });
+    };
 
     handleTitleEdit = (oldName, newName) => {
         const newState = {};
@@ -156,7 +161,7 @@ export default class JustForKix extends Component {
         styleTwo.overflow = this.state.bottomVisible ? 'default' : 'hidden';
 
         let topContent;
-        if (!this.state.ageChosen) {
+        if (this.state.showGameSelection) {
             topContent = (
                 <InitialTopContent
                     listHandle = { this.handleListSelection }
@@ -183,7 +188,6 @@ export default class JustForKix extends Component {
                 <LoggedOutBottomContent
                     mode = { this.state.mode }
                     handleLogin = { this.handleLogin }
-                    handleListChange = { this.handleListChange }
                 />
             );
         }
@@ -202,6 +206,7 @@ export default class JustForKix extends Component {
                     onClickIcon = { this.handleClickIcon }
                     handleAddGame = { this.handleAddGame }
                     onChangeActiveGame = { this.handleChangeActiveGame }
+                    handleListChange = { this.handleListChange }
                 />
                 <div style = { styleOne }>
                     { topContent }

@@ -89,10 +89,6 @@ export default class LoggedOutBottomContent extends Component {
 
         return (
             <div style = { style }>
-                <RaisedButton
-                    label = 'Switch Games'
-                    onClick = { this.props.handleListChange }
-                />
                 <Paper style = { paperStyle } zDepth = { 2 }>
                     <form onSubmit = { this.handleFormSubmit }>
                         <p style = { loginStyle }>Just for KIX</p>
@@ -129,5 +125,4 @@ export default class LoggedOutBottomContent extends Component {
 LoggedOutBottomContent.propTypes = {
     mode: PropTypes.string.isRequired,
     handleLogin: PropTypes.func.isRequired,
-    handleListChange: PropTypes.func.isRequired,
 };
