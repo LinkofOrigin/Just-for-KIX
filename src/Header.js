@@ -43,7 +43,7 @@ export default class Header extends Component {
         if (this.props.loggedIn) {
             if (this.props.mode === 'adult') {
                 headerStyle.backgroundColor = '#2150B5';
-            } else if(this.props.mode === 'child') {
+            } else if (this.props.mode === 'child') {
                 headerStyle.backgroundColor = '#3BED50';
             }
         }
@@ -54,13 +54,19 @@ export default class Header extends Component {
 
         return (
             <div style = { headerStyle }>
-                <GamesList
-                    list = { this.props.list }
-                    listName = 'activeGames'
-                    editable = { false }
-                    handleAddGame = { this.props.handleAddGame }
-                    onClickGame = { this.props.onChangeActiveGame }
-                />
+
+                {
+                    this.props.list.length !== 0 ?
+                        <GamesList
+                            list = { this.props.list }
+                            listName = 'activeGames'
+                            editable = { false }
+                            handleAddGame = { this.props.handleAddGame }
+                            onClickGame = { this.props.onChangeActiveGame }
+                        />
+                    :
+                    []
+                }
                 {
                     this.props.showSwitchGamesButton
                         ? <RaisedButton

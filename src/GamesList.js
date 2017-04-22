@@ -123,15 +123,15 @@ export default class GamesList extends Component {
             },
         );
     };
-    
+
     handleRemoveClick = () => {
         this.setState({ removing: !this.state.removing });
     };
-    
+
     handleDeleteList = () => {
         this.props.handleDeleteList(this.props.title);
     };
-    
+
     handleClickGame = (event) => {
         if (this.props.onClickGame) {
             this.props.onClickGame(event.target.id);
@@ -143,7 +143,7 @@ export default class GamesList extends Component {
         if (this.state.removing) {
             listRemovalStyle.display = 'inline-block';
         }
-        
+
         const editableH3Style = Object.assign({}, h3Style);
         editableH3Style.cursor = 'pointer';
 
@@ -236,18 +236,20 @@ export default class GamesList extends Component {
                     onDrop = { dropFunc }
                 >
                     {
-                        this.props.list.map((game, index) => {
-                            // 'key' prop encouraged when rendering with 'map'.
-                            return (
-                                <GameIcon
-                                    key = { game + index }
-                                    id = { game }
-                                    name = { game }
-                                    fromListName = { this.props.listName }
-                                    onClick = { this.handleClickGame }
-                                />
-                            );
-                        })
+                        this.props.list.length !== 0 ?
+                            this.props.list.map((game, index) => {
+                                // 'key' prop encouraged when rendering with 'map'.
+                                return (
+                                    <GameIcon
+                                        key = { game + index }
+                                        id = { game }
+                                        name = { game }
+                                        fromListName = { this.props.listName }
+                                        onClick = { this.handleClickGame }
+                                    />);
+                            })
+                            :
+                            'This list has no games!'
                     }
                 </div>
             </div>
