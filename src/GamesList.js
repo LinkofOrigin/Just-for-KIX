@@ -198,8 +198,10 @@ export default class GamesList extends Component {
 GamesList.propTypes = {
     list: PropTypes.array.isRequired,
     listName: PropTypes.string.isRequired,
+    inactive: PropTypes.bool,
     title: PropTypes.string,
     editable: PropTypes.bool.isRequired,
     handleAddGame: PropTypes.func.isRequired,
     handleTitleEdit: PropTypes.func,
+    handleDeleteList: PropTypes.func,
 };

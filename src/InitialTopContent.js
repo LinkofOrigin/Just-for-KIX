@@ -35,15 +35,20 @@ export default class InitialTopContent extends Component {
             <div style = { styles.ageChoiceStyle }>
                 <div style = { styles.boxContStyle }>
                     {
-                        this.props.lists.map((list, index) =>
-                            <div
-                                key = { list.name + index }
-                                id = { list.name }
-                                style = { styles.boxChoiceStyle }
-                                onClick = { this.handleSelection }
-                            >
-                                { list.name }
-                            </div>,
+                        this.props.lists.map((list, index) => {
+                            if (list.name !== 'Inactive Games') {
+                                return (
+                                    <div
+                                        key = { list.name + index }
+                                        id = { list.name }
+                                        style = { styles.boxChoiceStyle }
+                                        onClick = { this.handleSelection }
+                                    >
+                                        { list.name }
+                                    </div>
+                                );
+                            }
+                        },
                         )
                     }
                 </div>

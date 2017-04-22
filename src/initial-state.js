@@ -29,20 +29,23 @@ const initialState = {
                 Game.Six,
             ],
         },
+        {
+            name: 'Inactive Games',
+            games: [
+                Game.Seven,
+                Game.Eight,
+                Game.Nine,
+                Game.Ten,
+                Game.Eleven,
+                Game.Twelve,
+                Game.Thirteen,
+                Game.Fourteen,
+                Game.Fifteen,
+                Game.Sixteen,
+                Game.Seventeen,
+            ],
+        },
     ],
-    inactiveList: [
-        Game.Seven,
-        Game.Eight,
-        Game.Nine,
-        Game.Ten,
-        Game.Eleven,
-        Game.Twelve,
-        Game.Thirteen,
-        Game.Fourteen,
-        Game.Fifteen,
-        Game.Sixteen,
-        Game.Seventeen,
-    ]
 };
 
 export default initialState;

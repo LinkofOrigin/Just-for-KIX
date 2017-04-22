@@ -8,6 +8,7 @@ import GamesList from './GamesList';
 const styles = {
     root: {
         padding: '10px',
+        overflowY: 'scroll',
     },
     buttonConStyle: {
         marginTop: '30px',
@@ -140,26 +141,35 @@ export default class LoggedInBottomContent extends Component {
                     </form>
                 </div>
                 {
-                    this.props.lists.map((list, index) =>
-                        <GamesList
-                            key = { list.name + index }
-                            title = { list.name }
-                            list = { list.games }
-                            listName = { list.name }
-                            editable
-                            handleAddGame = { this.props.handleAddGame }
-                            handleTitleEdit = { this.props.handleTitleEdit }
-                            handleDeleteList = { this.props.handleDeleteList }
-                        />,
+                    this.props.lists.map((list, index) => {
+                        if (list.name === 'Inactive Games') {
+                            return (
+                                <GamesList
+                                    key = { list.name + index }
+                                    title = { list.name }
+                                    list = { list.games }
+                                    listName = { list.name }
+                                    inactive
+                                    editable
+                                    handleAddGame = { this.props.handleAddGame }
+                                    handleTitleEdit = { this.props.handleTitleEdit }
+                                    handleDeleteList = { this.props.handleDeleteList }
+                                />);
+                        }
+                        return (
+                            <GamesList
+                                key = { list.name + index }
+                                title = { list.name }
+                                list = { list.games }
+                                listName = { list.name }
+                                editable
+                                handleAddGame = { this.props.handleAddGame }
+                                handleTitleEdit = { this.props.handleTitleEdit }
+                                handleDeleteList = { this.props.handleDeleteList }
+                            />);
+                    },
                     )
                 }
-                <GamesList
-                    title = 'Inactive Games'
-                    list = { this.props.inactiveGames }
-                    listName = 'Inactive Games'
-                    editable = { true }
-                    handleAddGame = { this.props.handleAddGame }
-                />
             </div>
         );
     }
@@ -167,7 +177,6 @@ export default class LoggedInBottomContent extends Component {
 
 LoggedInBottomContent.propTypes = {
     lists: PropTypes.array.isRequired,
-    inactiveGames: PropTypes.array.isRequired,
     handleLogout: PropTypes.func.isRequired,
     handleModeSwitch: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,

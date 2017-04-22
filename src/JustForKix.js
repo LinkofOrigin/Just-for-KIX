@@ -168,7 +168,6 @@ export default class JustForKix extends Component {
             bottomContent = (
                 <LoggedInBottomContent
                     lists = { this.state.lists }
-                    inactiveGames = { this.state.inactiveList }
                     handleLogout = { this.handleLogout }
                     handleAddGame = { this.handleAddGame }
                     handleModeSwitch = { this.handleModeSwitch }
