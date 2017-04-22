@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { gameListIconMarginVH, gameListIconSideLengthVH } from './constants';
+
 const styles = {
     ageChoiceStyle: {
         backgroundColor: 'rgba(0,0,0,0.8)',
@@ -11,10 +13,10 @@ const styles = {
     },
     boxChoiceStyle: {
         display: 'inline-block',
-        width: '11em',
-        height: '11em',
-        margin: '50px 10px 0 10px',
-        lineHeight: '11em',
+        width: `${gameListIconSideLengthVH}vh`,
+        height: `${gameListIconSideLengthVH}vh`,
+        margin: `${gameListIconMarginVH * 2}vh ${gameListIconMarginVH}vh 0 ${gameListIconMarginVH}vh`,
+        lineHeight: `${gameListIconSideLengthVH}vh`,
         backgroundColor: '#333',
         border: '#555 solid 3px',
         color: 'white',

@@ -1,6 +1,9 @@
 export const gameIconSideLengthVH = 8;
 export const gameIconMarginVH = 1;
 
+export const gameListIconSideLengthVH = 14;
+export const gameListIconMarginVH = 1;
+
 export const Game = {
     One: 'one',
     Two: 'two',
