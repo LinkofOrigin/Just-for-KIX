@@ -153,7 +153,7 @@ export default class JustForKix extends Component {
 
         styleOne.backgroundImage = `url(${GameImage.get(this.state.activeGame)})`;
         styleOne.backgroundSize = 'cover';
-        styleOne.backgroundPosition = 'center bottom';
+        styleOne.backgroundPosition = 'center';
 
         const styleTwo = Object.assign({}, styles.bottom);
         styleTwo.height = this.state.bottomVisible ? '90vh' : '0';
