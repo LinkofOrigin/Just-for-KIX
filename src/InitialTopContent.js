@@ -38,7 +38,7 @@ export default class InitialTopContent extends Component {
                 <div style = { styles.boxContStyle }>
                     {
                         this.props.lists.map((list, index) => {
-                            if (index !== 0) {
+                            if (index !== 0 && list.games.length !== 0) {
                                 return (
                                     <div
                                         key = { list.name + index }
