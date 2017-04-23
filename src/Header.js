@@ -1,34 +1,43 @@
 import React, { Component, PropTypes } from 'react';
 
-import { grey200 } from 'material-ui/styles/colors';
+import { grey200, grey800 } from 'material-ui/styles/colors';
 import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import Settings from 'material-ui/svg-icons/action/settings';
 import ViewModule from 'material-ui/svg-icons/action/view-module';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import Toggle from 'material-ui/Toggle';
 import Person from 'material-ui/svg-icons/social/person-outline';
 import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
 import GamesList from './GamesList';
 
 const styles = {
+    headerItem: {
+        float: 'left',
+        height: `${gameIconSideLengthVH}vh`,
+        marginLeft: `${2 * gameIconMarginVH}vh`,
+    },
+    centeredHeaderItem: {
+        position: 'relative', top: '50%', transform: 'translateY(-50%)'
+    },
     icon: {
         width: '100%',
         height: '100%',
+    },
+    headerRightContainer: {
+        position: 'absolute',
+        right: `${gameIconMarginVH}vh`,
+        top: `${gameIconMarginVH}vh`,
     },
     iconContainer1: {
         cursor: 'pointer',
         width: `${gameIconSideLengthVH}vh`,
         height: `${gameIconSideLengthVH}vh`,
-        position: 'absolute',
-        right: `${gameIconMarginVH}vh`,
-        top: `${gameIconMarginVH}vh`,
     },
     iconContainer2: {
         cursor: 'pointer',
         width: `${gameIconSideLengthVH}vh`,
         height: `${gameIconSideLengthVH}vh`,
-        position: 'absolute',
-        right: `${(2 * gameIconMarginVH) + gameIconSideLengthVH}vh`,
-        top: `${gameIconMarginVH}vh`,
     },
     listChangeButton: {
         position: 'absolute',
@@ -36,6 +45,7 @@ const styles = {
         top: `${gameIconMarginVH}vh`,
     },
     defaultIconStyle: {
+        color: grey800,
         width: '100%',
         height: '100%',
         margin: 0,
@@ -46,6 +56,11 @@ const styles = {
         display: 'block',
         overflow: 'hidden',
     },
+    divider: {
+        height: '100%',
+        width: '1px',
+        backgroundColor: grey800,
+    }
 };
 
 export default class Header extends Component {
@@ -104,56 +119,72 @@ export default class Header extends Component {
                     :
                     []
                 }
-                {
-                    this.props.showListSelectionButton
-                        ? <Paper
-                            zDepth = { depthIcon2 }
-                            style = { iconContainer2 }
-                            onClick = { this.onShowHideLists }
-                        >
-                            <IconButton
-                                style = { styles.icon }
-                                iconStyle = { listIconStyle }
-                            >
-                                <ViewModule />
-                            </IconButton>
-                        </Paper>
-                        : null
-                }
-                {
-                    // person icon
-                    !this.props.loggedIn
-                        ? <Paper
-                            zDepth = { depthIcon1 }
-                            style = { iconContainer1 }
-                            onClick = { this.props.onClickIcon }
-                        >
-                            <IconButton
-                                style = { styles.icon }
-                                iconStyle = { personIconStyle }
-                            >
-                                <Person />
-                            </IconButton>
-                        </Paper>
-                        : null
-                }
-                {
-                    // settings icon
-                    this.props.loggedIn
-                        ? <Paper
-                            zDepth = { depthIcon1 }
-                            style = { iconContainer1 }
-                            onClick = { this.props.onClickIcon }
-                        >
-                            <IconButton
-                                style = { styles.icon }
-                                iconStyle = { settingsIconStyle }
-                            >
-                                <Settings />
-                            </IconButton>
-                        </Paper>
-                        : null
-                }
+                <div style = { styles.headerRightContainer }>
+                    {
+                        this.props.showListSelectionButton
+                            ? <div style = { styles.headerItem }>
+                                <Paper
+                                    zDepth = { depthIcon2 }
+                                    style = { iconContainer2 }
+                                    onClick = { this.onShowHideLists }
+                                >
+                                    <IconButton
+                                        style = { styles.icon }
+                                        iconStyle = { listIconStyle }
+                                    >
+                                        <ViewModule />
+                                    </IconButton>
+                                </Paper>
+                            </div>
+                            : null
+                    }
+                    {
+                        // person icon
+                        !this.props.loggedIn
+                            ? <div style = { styles.headerItem }>
+                                <Paper
+                                    zDepth = { depthIcon1 }
+                                    style = { iconContainer1 }
+                                    onClick = { this.props.onClickIcon }
+                                >
+                                    <IconButton
+                                        style = { styles.icon }
+                                        iconStyle = { personIconStyle }
+                                    >
+                                        <Person />
+                                    </IconButton>
+                                </Paper>
+                            </div>
+                            : null
+                    }
+                    {
+                        // settings icon
+                        this.props.loggedIn
+                            ? <div style = { styles.headerItem }>
+                                <Paper
+                                    zDepth = { depthIcon1 }
+                                    style = { iconContainer1 }
+                                    onClick = { this.props.onClickIcon }
+                                >
+                                    <IconButton
+                                        style = { styles.icon }
+                                        iconStyle = { settingsIconStyle }
+                                    >
+                                        <Settings />
+                                    </IconButton>
+                                </Paper>
+                            </div>
+                            : null
+                    }
+                    <div style = { styles.headerItem }>
+                        <div style = { styles.divider }></div>
+                    </div>
+                    <div style = { styles.headerItem }>
+                        <div style = { styles.centeredHeaderItem }>
+                            <Toggle label = 'Child mode' />
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
