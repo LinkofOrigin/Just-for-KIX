@@ -171,34 +171,6 @@ export default class JustForKix extends Component {
         styleTwo.height = bottomVisible ? '90vh' : '0';
         styleTwo.overflow = bottomVisible ? 'default' : 'hidden';
 
-        const loginVisible = bottomVisible;
-
-        const loginAreaContent = (
-            <LoggedOutBottomContent
-                adultMode = { this.state.adultMode }
-                handleLogin = { this.handleLogin }
-            />
-        );
-
-        const settingsAreaContent = (
-            <LoggedInBottomContent
-                lists = { this.state.lists }
-                handleLogout = { this.handleLogout }
-                handleAddGame = { this.handleAddGame }
-                handleModeSwitch = { this.handleModeSwitch }
-                handleTitleEdit = { this.handleTitleEdit }
-                handleAddList = { this.handleAddList }
-                handleDeleteList = { this.handleDeleteList }
-            />
-        );
-
-        let bottomContent;
-        if (this.state.loggedIn && this.state.adultMode) {
-            bottomContent = settingsAreaContent;
-        } else {
-            bottomContent = loginAreaContent;
-        }
-
         let activeGames = this.state.currentGamesList;
         if (this.state.adultMode) {
             activeGames = [];
@@ -210,7 +182,7 @@ export default class JustForKix extends Component {
             <div style = { { overflow: 'hidden' } }>
                 <Header
                     listSelectionOpen = { this.state.showGameSelection }
-                    bottomContentOpen = { loginVisible }
+                    bottomContentOpen = { bottomVisible }
                     list = { activeGames }
                     handleAddGame = { this.handleAddGame }
                     onChangeActiveGame = { this.handleChangeActiveGame }
@@ -228,7 +200,22 @@ export default class JustForKix extends Component {
                     />
                 </div>
                 <div style = { styleTwo }>
-                    { bottomContent }
+                    {
+                        this.state.loggedIn && this.state.adultMode
+                            ? <LoggedInBottomContent
+                                lists = { this.state.lists }
+                                handleLogout = { this.handleLogout }
+                                handleAddGame = { this.handleAddGame }
+                                handleModeSwitch = { this.handleModeSwitch }
+                                handleTitleEdit = { this.handleTitleEdit }
+                                handleAddList = { this.handleAddList }
+                                handleDeleteList = { this.handleDeleteList }
+                            />
+                            : <LoggedOutBottomContent
+                                adultMode = { this.state.adultMode }
+                                handleLogin = { this.handleLogin }
+                            />
+                    }
                 </div>
             </div>
         );
