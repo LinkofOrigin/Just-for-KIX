@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { grey600 } from 'material-ui/styles/colors';
 import Header from './Header';
 import InitialTopContent from './InitialTopContent';
 import LoggedInBottomContent from './LoggedInBottomContent';
@@ -177,8 +176,6 @@ export default class JustForKix extends Component {
         const loginAreaContent = (
             <LoggedOutBottomContent
                 adultMode = { this.state.adultMode }
-                adultColor = { adultLight }
-                childColor = { childLight }
                 handleLogin = { this.handleLogin }
             />
         );
