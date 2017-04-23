@@ -41,12 +41,12 @@ export default class JustForKix extends Component {
     handleChangeActiveGame = (newGame) => {
         this.setState({
             activeGame: newGame,
+            adultMode: false,
         });
     };
 
     handleLogin = () => this.setState({
         loggedIn: true,
-        adultMode: true,
         currentGamesList: [],
     });
     handleLogout = () => this.setState({
@@ -172,11 +172,11 @@ export default class JustForKix extends Component {
         styleTwo.overflow = bottomVisible ? 'default' : 'hidden';
 
         let activeGames = this.state.currentGamesList;
-        if (this.state.adultMode) {
+        if (this.state.loggedIn) {
             activeGames = [];
         }
 
-        const showSwitchGamesButton = !this.state.adultMode && this.state.activeGame !== undefined;
+        const showSwitchGamesButton = !this.state.loggedIn && this.state.activeGame !== undefined;
 
         return (
             <div style = { { overflow: 'hidden' } }>
@@ -196,7 +196,7 @@ export default class JustForKix extends Component {
                     <InitialTopContent
                         listHandle = { this.handleListSelection }
                         lists = { this.state.lists }
-                        style = { { opacity: this.state.showGameSelection ? 1 : 0 } }
+                        style = { { display: this.state.showGameSelection ? 'block' : 'none' } }
                     />
                 </div>
                 <div style = { styleTwo }>
