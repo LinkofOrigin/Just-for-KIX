@@ -261,7 +261,8 @@ export default class GamesList extends Component {
                                     />);
                             })
                             :
-                            'This list has no games!'
+                            !this.props.inactive ? 'This list has no games!' 
+                                : "Place games you don't want your kids to see here"
                     }
                 </div>
             </div>

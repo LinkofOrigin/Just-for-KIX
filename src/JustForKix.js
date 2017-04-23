@@ -56,12 +56,15 @@ export default class JustForKix extends Component {
     });
 
     handleAddGame = (fromListName, toListName, gameId) => {
-        const newLists = this.state.lists;
+        const fromListInd = this.getListIndex(fromListName);
         const toListInd = this.getListIndex(toListName);
+        
+        if(fromListInd < 0 || toListInd < 0) return;// bail, error
+        
+        const newLists = this.state.lists;
         newLists[toListInd].games.push(gameId);
 
         // remove from list.
-        const fromListInd = this.getListIndex(fromListName);
         const index = newLists[fromListInd].games.indexOf(gameId);
         if (index > -1) {
             newLists[fromListInd].games.splice(index, 1);
