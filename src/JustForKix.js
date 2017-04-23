@@ -5,7 +5,7 @@ import LoggedInBottomContent from './LoggedInBottomContent';
 import LoggedOutBottomContent from './LoggedOutBottomContent';
 import initialState from './initial-state';
 
-import { adultLight, adultDark, childLight, GameImage } from './constants';
+import { adultDark, GameImage } from './constants';
 
 const styles = {
     bottom: {

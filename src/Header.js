@@ -11,18 +11,24 @@ import GamesList from './GamesList';
 import { adultLight, adultDark, adultMiddle, childLight, childDark, childMiddle } from './constants';
 
 const styles = {
+    root: {
+        width: '100%',
+        height: `${(2 * gameIconMarginVH) + gameIconSideLengthVH}vh`,
+        display: 'block',
+        overflow: 'hidden',
+    },
     headerItem: {
         float: 'left',
         height: `${gameIconSideLengthVH}vh`,
         marginLeft: `${2 * gameIconMarginVH}vh`,
         fontFamily: 'Roboto, sans-serif',
     },
-    toggleLabel: {
+    toggleGroupItem: {
         verticalAlign: 'middle', // somehow this works????
         display: 'inline-block',
         margin: '0 3px',
     },
-    centeredHeaderItem: {
+    toggleGroup: {
         position: 'relative',
         top: '50%',
         transform: 'translateY(-50%)',
@@ -36,38 +42,25 @@ const styles = {
         right: `${gameIconMarginVH}vh`,
         top: `${gameIconMarginVH}vh`,
     },
-    iconContainer1: {
+    listIconContainerDefault: {
         cursor: 'pointer',
         width: `${gameIconSideLengthVH}vh`,
         height: `${gameIconSideLengthVH}vh`,
     },
-    iconContainer2: {
-        cursor: 'pointer',
-        width: `${gameIconSideLengthVH}vh`,
-        height: `${gameIconSideLengthVH}vh`,
-    },
-    listChangeButton: {
-        position: 'absolute',
-        right: `${gameIconSideLengthVH + (2 * gameIconMarginVH)}vh`,
-        top: `${gameIconMarginVH}vh`,
-    },
-    defaultIconStyle: {
+    iconStyle: {
         color: grey800,
         width: '100%',
         height: '100%',
         margin: 0,
-    },
-    top: {
-        width: '100%',
-        height: `${(2 * gameIconMarginVH) + gameIconSideLengthVH}vh`,
-        display: 'block',
-        overflow: 'hidden',
     },
     divider: {
         height: '100%',
         width: '1px',
         backgroundColor: grey800,
     },
+};
+
+const toggleStyles = {
     thumbOff: {
         backgroundColor: childLight,
     },
@@ -96,27 +89,22 @@ export default class Header extends Component {
     };
 
     render() {
-        const listIconStyle = Object.assign({}, styles.defaultIconStyle);
-
-        const headerStyle = Object.assign({}, styles.top);
+        const rootStyle = Object.assign({}, styles.root);
         if (this.props.adultMode) {
-            headerStyle.backgroundColor = adultMiddle;
+            rootStyle.backgroundColor = adultMiddle;
         } else {
-            headerStyle.backgroundColor = childMiddle;
+            rootStyle.backgroundColor = childMiddle;
         }
 
-        let iconContainer2 = Object.assign({}, styles.iconContainer2);
+        let listIconContainer = Object.assign({}, styles.listIconContainerDefault);
         let depthIcon2 = 3;
         if (this.props.listSelectionOpen) {
-            iconContainer2.backgroundColor = grey200;
+            listIconContainer.backgroundColor = grey200;
             depthIcon2 = 1;
         }
 
-        const toggleLabel = this.props.adultMode ? 'Adult mode' : 'Child mode';
-
         return (
-            <div style = { headerStyle }>
-
+            <div style = { rootStyle }>
                 {
                     this.props.list.length !== 0 ?
                         <GamesList
@@ -135,12 +123,12 @@ export default class Header extends Component {
                             ? <div style = { styles.headerItem }>
                                 <Paper
                                     zDepth = { depthIcon2 }
-                                    style = { iconContainer2 }
+                                    style = { listIconContainer }
                                     onClick = { this.onShowHideLists }
                                 >
                                     <IconButton
                                         style = { styles.icon }
-                                        iconStyle = { listIconStyle }
+                                        iconStyle = { styles.iconStyle }
                                     >
                                         <ViewModule />
                                     </IconButton>
@@ -152,25 +140,25 @@ export default class Header extends Component {
                         <div style = { styles.divider } />
                     </div>
                     <div style = { styles.headerItem }>
-                        <div style = { styles.centeredHeaderItem }>
-                            <div style = { styles.toggleLabel }>
-                                <div>CHILD</div>
+                        <div style = { styles.toggleGroup }>
+                            <div style = { styles.toggleGroupItem }>
+                                CHILD
                             </div>
-                            <div style = { styles.toggleLabel }>
+                            <div style = { styles.toggleGroupItem }>
                                 <Toggle
                                     toggled = { this.props.adultMode }
                                     onToggle = { this.handleToggleUserMode }
-                                    thumbStyle = { styles.thumbOff }
-                                    trackStyle = { styles.trackOff }
-                                    thumbSwitchedStyle = { styles.thumbSwitched }
-                                    trackSwitchedStyle = { styles.trackSwitched }
+                                    thumbStyle = { toggleStyles.thumbOff }
+                                    trackStyle = { toggleStyles.trackOff }
+                                    thumbSwitchedStyle = { toggleStyles.thumbSwitched }
+                                    trackSwitchedStyle = { toggleStyles.trackSwitched }
 
                                     inputStyle = { { marginLeft: '0' } }
                                     elementStyle = { { marginLeft: '0' } }
                                 />
                             </div>
-                            <div style = { styles.toggleLabel }>
-                                <div>ADULT</div>
+                            <div style = { styles.toggleGroupItem }>
+                                ADULT
                             </div>
                         </div>
                     </div>
