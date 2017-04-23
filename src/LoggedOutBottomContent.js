@@ -85,14 +85,6 @@ export default class LoggedOutBottomContent extends Component {
     };
 
     render() {
-        const loginButtonText = this.props.mode === 'child' ? 'Switch to Adult Mode' : 'Log In!';
-        const buttonColor = {};
-        let labelColor = 'black';
-        if (this.props.mode === 'child') {
-            buttonColor.backgroundColor = this.props.adultColor;
-            labelColor = 'white';
-        }
-
         return (
             <div style = { style }>
                 <Paper style = { paperStyle } zDepth = { 2 }>
@@ -118,9 +110,7 @@ export default class LoggedOutBottomContent extends Component {
                         <br />
                         <RaisedButton
                             style = { buttonStyle }
-                            overlayStyle = { buttonColor }
-                            label = { loginButtonText }
-                            labelColor = { labelColor }
+                            label = 'Log In!'
                             type = 'submit'
                         />
                     </form>
@@ -131,8 +121,6 @@ export default class LoggedOutBottomContent extends Component {
 }
 
 LoggedOutBottomContent.propTypes = {
-    mode: PropTypes.string.isRequired,
-    adultColor: PropTypes.string.isRequired,
-    childColor: PropTypes.string.isRequired,
+    adultMode: PropTypes.bool.isRequired,
     handleLogin: PropTypes.func.isRequired,
 };

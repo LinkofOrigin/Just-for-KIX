@@ -9,6 +9,7 @@ const styles = {
     root: {
         padding: '10px',
         overflowY: 'scroll',
+        height: '100%',
     },
     buttonConStyle: {
         marginTop: '30px',
@@ -100,19 +101,19 @@ export default class LoggedInBottomContent extends Component {
         return (
             <div style = { styles.root }>
                 <div style = { styles.tooltipStyle }>Click and drag games to organize lists</div>
-                <div style = { styles.buttonConStyle }>
-                    <RaisedButton
-                        label = 'Switch to Child Mode'
-                        style = { styles.buttonStyle }
-                        overlayStyle = { { backgroundColor: this.props.childColor } }
-                        onClick = { this.props.handleModeSwitch }
-                    />
-                    <RaisedButton
-                        label = 'Log Out'
-                        style = { styles.buttonStyle }
-                        onClick = { this.props.handleLogout }
-                    />
-                </div>
+                {/*<div style = { styles.buttonConStyle }>*/}
+                    {/*<RaisedButton*/}
+                        {/*label = 'Switch to Child Mode'*/}
+                        {/*style = { styles.buttonStyle }*/}
+                        {/*overlayStyle = { { backgroundColor: childColor } }*/}
+                        {/*onClick = { this.props.handleModeSwitch }*/}
+                    {/*/>*/}
+                    {/*<RaisedButton*/}
+                        {/*label = 'Log Out'*/}
+                        {/*style = { styles.buttonStyle }*/}
+                        {/*onClick = { this.props.handleLogout }*/}
+                    {/*/>*/}
+                {/*</div>*/}
                 <RaisedButton
                     label = 'Add a List'
                     labelColor = 'white'
@@ -176,7 +177,6 @@ export default class LoggedInBottomContent extends Component {
 
 LoggedInBottomContent.propTypes = {
     lists: PropTypes.array.isRequired,
-    childColor: PropTypes.string.isRequired,
     handleLogout: PropTypes.func.isRequired,
     handleModeSwitch: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,

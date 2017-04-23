@@ -1,8 +1,24 @@
+import {
+    lightGreen200,
+    lightGreen400,
+    lightGreen700,
+    blue200,
+    blue400,
+    blue700,
+} from 'material-ui/styles/colors';
+
 export const gameIconSideLengthVH = 8;
 export const gameIconMarginVH = 1;
 
 export const gameListIconSideLengthVH = 14;
 export const gameListIconMarginVH = 1;
+
+export const adultLight = blue200; // '#2150B5';
+export const adultMiddle = blue400;
+export const adultDark = blue700;
+export const childLight = lightGreen200; // '#3BED50'
+export const childMiddle = lightGreen400;
+export const childDark = lightGreen700;
 
 export const Game = {
     One: 'one',

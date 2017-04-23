@@ -3,8 +3,8 @@ import { Game } from './constants';
 const initialState = {
     loggedIn: false,
     showGameSelection: true,
-    mode: 'none',
-    bottomVisible: false,
+    // tied to toggle.
+    adultMode: false,
     activeGame: undefined,
     currentGamesList: [],
     lists: [

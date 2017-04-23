@@ -6,15 +6,12 @@ import LoggedInBottomContent from './LoggedInBottomContent';
 import LoggedOutBottomContent from './LoggedOutBottomContent';
 import initialState from './initial-state';
 
-import { GameImage } from './constants';
-
-const adultColor = '#2150B5';
-const childColor = '#3BED50';
+import { adultLight, adultDark, childLight, GameImage } from './constants';
 
 const styles = {
     bottom: {
         height: '90vh',
-        background: grey600,
+        background: adultDark,
         transition: 'all 0.5s ease',
     },
 };
@@ -48,20 +45,14 @@ export default class JustForKix extends Component {
         });
     };
 
-    handleClickIcon = () => {
-        // similar to this.state.bottomVisible = !this.state.bottomVisible;
-        // but modifying state with this method causes component to re-render.
-        this.setState({ bottomVisible: !this.state.bottomVisible });
-    };
-
     handleLogin = () => this.setState({
         loggedIn: true,
-        mode: 'adult',
+        adultMode: true,
         currentGamesList: [],
     });
     handleLogout = () => this.setState({
         loggedIn: false,
-        mode: 'none',
+        adultMode: false,
         showGameSelection: true,
     });
 
@@ -96,24 +87,27 @@ export default class JustForKix extends Component {
     };
 
     handleModeSwitch = () => {
-        if (this.state.mode === 'adult') {
-            this.setState({ mode: 'child', showGameSelection: true, bottomVisible: false });
-        } else if (this.state.mode === 'child') {
-            this.setState({ mode: 'adult' });
+        if (this.state.adultMode) {
+            this.setState({
+                adultMode: false,
+                showGameSelection: true,
+            });
+        } else {
+            this.setState({
+                adultMode: true,
+            });
         }
     };
 
     handleShowLists = () => {
         this.setState({
             showGameSelection: true,
-            bottomVisible: false,
         });
     };
 
     handleHideLists = () => {
         this.setState({
             showGameSelection: false,
-            // bottomVisible: true,
         });
     };
 
@@ -156,73 +150,84 @@ export default class JustForKix extends Component {
         this.setState(newState);
     };
 
+    handleToggleUserMode = () => {
+        this.setState({
+            adultMode: !this.state.adultMode,
+            loggedIn: false,
+        });
+    };
+
     render() {
+        const bottomVisible = this.state.adultMode;
+
         const styleOne = Object.assign({}, styles.bottom);
-        styleOne.height = this.state.bottomVisible ? '0' : '90vh';
-        styleOne.overflow = this.state.bottomVisible ? 'hidden' : 'default';
+        styleOne.height = bottomVisible ? '0' : '90vh';
+        styleOne.overflow = bottomVisible ? 'hidden' : 'default';
 
         styleOne.backgroundImage = `url(${GameImage.get(this.state.activeGame)})`;
         styleOne.backgroundSize = 'cover';
         styleOne.backgroundPosition = 'center';
 
         const styleTwo = Object.assign({}, styles.bottom);
-        styleTwo.height = this.state.bottomVisible ? '90vh' : '0';
-        styleTwo.overflow = this.state.bottomVisible ? 'default' : 'hidden';
+        styleTwo.height = bottomVisible ? '90vh' : '0';
+        styleTwo.overflow = bottomVisible ? 'default' : 'hidden';
+
+        const loginVisible = bottomVisible;
+
+        const loginAreaContent = (
+            <LoggedOutBottomContent
+                adultMode = { this.state.adultMode }
+                adultColor = { adultLight }
+                childColor = { childLight }
+                handleLogin = { this.handleLogin }
+            />
+        );
+
+        const settingsAreaContent = (
+            <LoggedInBottomContent
+                lists = { this.state.lists }
+                handleLogout = { this.handleLogout }
+                handleAddGame = { this.handleAddGame }
+                handleModeSwitch = { this.handleModeSwitch }
+                handleTitleEdit = { this.handleTitleEdit }
+                handleAddList = { this.handleAddList }
+                handleDeleteList = { this.handleDeleteList }
+            />
+        );
 
         let bottomContent;
-        if (this.state.loggedIn && this.state.mode === 'adult') {
-            bottomContent = (
-                <LoggedInBottomContent
-                    lists = { this.state.lists }
-                    childColor = { childColor }
-                    handleLogout = { this.handleLogout }
-                    handleAddGame = { this.handleAddGame }
-                    handleModeSwitch = { this.handleModeSwitch }
-                    handleTitleEdit = { this.handleTitleEdit }
-                    handleAddList = { this.handleAddList }
-                    handleDeleteList = { this.handleDeleteList }
-                />
-            );
+        if (this.state.loggedIn && this.state.adultMode) {
+            bottomContent = settingsAreaContent;
         } else {
-            bottomContent = (
-                <LoggedOutBottomContent
-                    mode = { this.state.mode }
-                    adultColor = { adultColor }
-                    childColor = { childColor }
-                    handleLogin = { this.handleLogin }
-                />
-            );
+            bottomContent = loginAreaContent;
         }
 
         let activeGames = this.state.currentGamesList;
-        if (this.state.mode === 'adult') {
+        if (this.state.adultMode) {
             activeGames = [];
         }
 
-        const showSwitchGamesButton = this.state.mode !== 'adult' && this.state.activeGame !== undefined;
+        const showSwitchGamesButton = !this.state.adultMode && this.state.activeGame !== undefined;
 
         return (
             <div style = { { overflow: 'hidden' } }>
                 <Header
                     listSelectionOpen = { this.state.showGameSelection }
-                    bottomContentOpen = { this.state.bottomVisible }
-                    loggedIn = { this.state.loggedIn }
-                    mode = { this.state.mode }
-                    adultColor = { adultColor }
-                    childColor = { childColor }
+                    bottomContentOpen = { loginVisible }
                     list = { activeGames }
                     handleAddGame = { this.handleAddGame }
                     onChangeActiveGame = { this.handleChangeActiveGame }
-                    showListSelectionButton= { showSwitchGamesButton }
+                    showListSelectionButton = { showSwitchGamesButton }
                     onShowLists = { this.handleShowLists }
                     onHideLists = { this.handleHideLists }
-                    onClickIcon = { this.handleClickIcon }
+                    onToggleUserMode = { this.handleToggleUserMode }
+                    adultMode = { this.state.adultMode }
                 />
                 <div style = { styleOne }>
                     <InitialTopContent
                         listHandle = { this.handleListSelection }
                         lists = { this.state.lists }
-                        style = { { opacity: this.state.showGameSelection ? 1 : 0} }
+                        style = { { opacity: this.state.showGameSelection ? 1 : 0 } }
                     />
                 </div>
                 <div style = { styleTwo }>
