@@ -5,6 +5,7 @@ import Paper from 'material-ui/Paper';
 import IconButton from 'material-ui/IconButton';
 import ViewModule from 'material-ui/svg-icons/action/view-module';
 import Toggle from 'material-ui/Toggle';
+import { Scrollbars } from 'react-custom-scrollbars';
 import { gameIconMarginVH, gameIconSideLengthVH } from './constants';
 import GamesList from './GamesList';
 
@@ -16,6 +17,11 @@ const styles = {
         height: `${(2 * gameIconMarginVH) + gameIconSideLengthVH}vh`,
         display: 'block',
         overflow: 'hidden',
+    },
+    listCont: {
+        width: '65%',
+        maxHeight: '100px',
+        float: 'left',
     },
     headerItem: {
         float: 'left',
@@ -105,18 +111,23 @@ export default class Header extends Component {
 
         return (
             <div style = { rootStyle }>
-                {
-                    this.props.list.length !== 0 ?
-                        <GamesList
-                            list = { this.props.list }
-                            listName = 'activeGames'
-                            editable = { false }
-                            handleAddGame = { this.props.handleAddGame }
-                            onClickGame = { this.props.onChangeActiveGame }
-                        />
-                    :
-                    []
-                }
+                <Scrollbars
+                    hideTracksWhenNotNeeded
+                    style = { styles.listCont }
+                >
+                    {
+                        this.props.list.length !== 0 ?
+                            <GamesList
+                                list = { this.props.list }
+                                listName = 'activeGames'
+                                editable = { false }
+                                handleAddGame = { this.props.handleAddGame }
+                                onClickGame = { this.props.onChangeActiveGame }
+                            />
+                        :
+                        []
+                    }
+                </Scrollbars>
                 <div style = { styles.headerRightContainer }>
                     {
                         this.props.showListSelectionButton
