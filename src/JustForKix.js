@@ -47,8 +47,8 @@ export default class JustForKix extends Component {
 
     handleLogin = () => this.setState({
         loggedIn: true,
-        currentGamesList: [],
     });
+
     handleLogout = () => this.setState({
         loggedIn: false,
         adultMode: false,
@@ -86,19 +86,6 @@ export default class JustForKix extends Component {
                 currentGamesList: gamesList,
             },
         );
-    };
-
-    handleModeSwitch = () => {
-        if (this.state.adultMode) {
-            this.setState({
-                adultMode: false,
-                showGameSelection: true,
-            });
-        } else {
-            this.setState({
-                adultMode: true,
-            });
-        }
     };
 
     handleShowLists = () => {
@@ -153,10 +140,17 @@ export default class JustForKix extends Component {
     };
 
     handleToggleUserMode = () => {
-        this.setState({
-            adultMode: !this.state.adultMode,
-            loggedIn: false,
-        });
+        if (this.state.adultMode) {
+            this.setState({
+                adultMode: false,
+                loggedIn: false,
+            });
+        } else {
+            this.setState({
+                adultMode: true,
+                loggedIn: false,
+            });
+        }
     };
 
     render() {
@@ -209,7 +203,6 @@ export default class JustForKix extends Component {
                                 lists = { this.state.lists }
                                 handleLogout = { this.handleLogout }
                                 handleAddGame = { this.handleAddGame }
-                                handleModeSwitch = { this.handleModeSwitch }
                                 handleTitleEdit = { this.handleTitleEdit }
                                 handleAddList = { this.handleAddList }
                                 handleDeleteList = { this.handleDeleteList }

@@ -178,7 +178,6 @@ export default class LoggedInBottomContent extends Component {
 LoggedInBottomContent.propTypes = {
     lists: PropTypes.array.isRequired,
     handleLogout: PropTypes.func.isRequired,
-    handleModeSwitch: PropTypes.func.isRequired,
     handleAddGame: PropTypes.func.isRequired,
     handleTitleEdit: PropTypes.func,
     handleAddList: PropTypes.func,
