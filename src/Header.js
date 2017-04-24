@@ -19,9 +19,9 @@ const styles = {
         overflow: 'hidden',
     },
     listCont: {
-        width: '65%',
-        maxHeight: '100px',
-        float: 'left',
+        display: 'inline-block',
+        width: '75%',
+        height: '100%',
     },
     headerItem: {
         float: 'left',
@@ -111,23 +111,27 @@ export default class Header extends Component {
 
         return (
             <div style = { rootStyle }>
-                <Scrollbars
-                    hideTracksWhenNotNeeded
-                    style = { styles.listCont }
-                >
-                    {
-                        this.props.list.length !== 0 ?
-                            <GamesList
-                                list = { this.props.list }
-                                listName = 'activeGames'
-                                editable = { false }
-                                handleAddGame = { this.props.handleAddGame }
-                                onClickGame = { this.props.onChangeActiveGame }
-                            />
-                        :
-                        []
-                    }
-                </Scrollbars>
+                <div style = { styles.listCont }>
+                    <Scrollbars
+                        autoHeight
+                        hideTracksWhenNotNeeded = { true }
+                    >
+                        <div style = { { width: '150%' } }>
+                            {
+                                this.props.list.length !== 0 ?
+                                    <GamesList
+                                        list = { this.props.list }
+                                        listName = 'activeGames'
+                                        editable = { false }
+                                        handleAddGame = { this.props.handleAddGame }
+                                        onClickGame = { this.props.onChangeActiveGame }
+                                    />
+                                :
+                                null
+                            }
+                        </div>
+                    </Scrollbars>
+                </div>
                 <div style = { styles.headerRightContainer }>
                     {
                         this.props.showListSelectionButton
