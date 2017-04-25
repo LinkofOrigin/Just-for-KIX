@@ -16,19 +16,22 @@ const styles = {
         width: '100%',
         height: `${(2 * gameIconMarginVH) + gameIconSideLengthVH}vh`,
         display: 'flex',
+        justifyContent: 'flex-end',
+        flexFlow: 'row',
         overflow: 'hidden',
     },
     listCont: {
         display: 'inline-flex',
+        width: '100%',
         height: '100%',
-        float: 'none',
         overflowY: 'hidden',
         whiteSpace: 'nowrap',
     },
     headerItem: {
         float: 'left',
         height: `${gameIconSideLengthVH}vh`,
-        marginLeft: `${2 * gameIconMarginVH}vh`,
+        paddingLeft: `${gameIconMarginVH}vh`,
+        paddingRight: `${gameIconMarginVH}vh`,
         marginTop: 'auto',
         marginBottom: 'auto',
         fontFamily: 'Roboto, sans-serif',
@@ -42,6 +45,7 @@ const styles = {
         position: 'relative',
         top: '50%',
         transform: 'translateY(-50%)',
+        paddingRight: '10px',
     },
     icon: {
         width: '100%',
@@ -50,7 +54,7 @@ const styles = {
     headerRightContainer: {
         display: 'inline-flex',
         whitespace: 'nowrap',
-        marginRight: '10px',
+        float: 'right',
     },
     listIconContainerDefault: {
         cursor: 'pointer',
