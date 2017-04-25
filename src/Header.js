@@ -15,18 +15,22 @@ const styles = {
     root: {
         width: '100%',
         height: `${(2 * gameIconMarginVH) + gameIconSideLengthVH}vh`,
-        display: 'block',
+        display: 'flex',
         overflow: 'hidden',
     },
     listCont: {
-        display: 'inline-block',
-        width: '75%',
+        display: 'inline-flex',
         height: '100%',
+        float: 'none',
+        overflowY: 'hidden',
+        whiteSpace: 'nowrap',
     },
     headerItem: {
         float: 'left',
         height: `${gameIconSideLengthVH}vh`,
         marginLeft: `${2 * gameIconMarginVH}vh`,
+        marginTop: 'auto',
+        marginBottom: 'auto',
         fontFamily: 'Roboto, sans-serif',
     },
     toggleGroupItem: {
@@ -35,6 +39,7 @@ const styles = {
         margin: '0 3px',
     },
     toggleGroup: {
+        display: 'flex',
         position: 'relative',
         top: '50%',
         transform: 'translateY(-50%)',
@@ -44,9 +49,10 @@ const styles = {
         height: '100%',
     },
     headerRightContainer: {
-        position: 'absolute',
-        right: `${gameIconMarginVH}vh`,
-        top: `${gameIconMarginVH}vh`,
+        display: 'inline-flex',
+        whitespace: 'nowrap',
+        height: '100%',
+        paddingRight: '10px',
     },
     listIconContainerDefault: {
         cursor: 'pointer',
@@ -114,22 +120,20 @@ export default class Header extends Component {
                 <div style = { styles.listCont }>
                     <Scrollbars
                         autoHeight
-                        hideTracksWhenNotNeeded = { true }
+                        hideTracksWhenNotNeeded
                     >
-                        <div style = { { width: '150%' } }>
-                            {
-                                this.props.list.length !== 0 ?
-                                    <GamesList
-                                        list = { this.props.list }
-                                        listName = 'activeGames'
-                                        editable = { false }
-                                        handleAddGame = { this.props.handleAddGame }
-                                        onClickGame = { this.props.onChangeActiveGame }
-                                    />
-                                :
-                                null
-                            }
-                        </div>
+                        {
+                            this.props.list.length !== 0 ?
+                                <GamesList
+                                    list = { this.props.list }
+                                    listName = 'activeGames'
+                                    editable = { false }
+                                    handleAddGame = { this.props.handleAddGame }
+                                    onClickGame = { this.props.onChangeActiveGame }
+                                />
+                            :
+                            null
+                        }
                     </Scrollbars>
                 </div>
                 <div style = { styles.headerRightContainer }>

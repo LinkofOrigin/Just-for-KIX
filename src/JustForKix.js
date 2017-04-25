@@ -58,9 +58,9 @@ export default class JustForKix extends Component {
     handleAddGame = (fromListName, toListName, gameId) => {
         const fromListInd = this.getListIndex(fromListName);
         const toListInd = this.getListIndex(toListName);
-        
-        if(fromListInd < 0 || toListInd < 0) return;// bail, error
-        
+
+        if (fromListInd < 0 || toListInd < 0) return; // bail, error
+
         const newLists = this.state.lists;
         newLists[toListInd].games.push(gameId);
 
