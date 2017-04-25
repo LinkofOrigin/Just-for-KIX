@@ -110,7 +110,7 @@ export default class Header extends Component {
             rootStyle.backgroundColor = childMiddle;
         }
 
-        let listIconContainer = Object.assign({}, styles.listIconContainerDefault);
+        const listIconContainer = Object.assign({}, styles.listIconContainerDefault);
         let depthIcon2 = 3;
         if (this.props.listSelectionOpen) {
             listIconContainer.backgroundColor = grey200;
@@ -120,12 +120,12 @@ export default class Header extends Component {
         return (
             <div style = { rootStyle }>
                 <div style = { styles.listCont }>
-                    <Scrollbars
-                        autoHeight
-                        hideTracksWhenNotNeeded
-                    >
-                        {
-                            this.props.list.length !== 0 ?
+                    {
+                        this.props.list.length !== 0 ?
+                            <Scrollbars
+                                autoHeight
+                                hideTracksWhenNotNeeded
+                            >
                                 <GamesList
                                     list = { this.props.list }
                                     listName = 'activeGames'
@@ -133,10 +133,10 @@ export default class Header extends Component {
                                     handleAddGame = { this.props.handleAddGame }
                                     onClickGame = { this.props.onChangeActiveGame }
                                 />
-                            :
-                            null
-                        }
-                    </Scrollbars>
+                            </Scrollbars>
+                                :
+                                null
+                    }
                 </div>
                 <div style = { styles.headerRightContainer }>
                     {
