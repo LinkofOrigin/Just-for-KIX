@@ -34,7 +34,6 @@ const styles = {
         fontFamily: 'Roboto, sans-serif',
     },
     toggleGroupItem: {
-        verticalAlign: 'middle', // somehow this works????
         display: 'inline-block',
         margin: '0 3px',
     },
@@ -51,8 +50,7 @@ const styles = {
     headerRightContainer: {
         display: 'inline-flex',
         whitespace: 'nowrap',
-        height: '100%',
-        paddingRight: '10px',
+        marginRight: '10px',
     },
     listIconContainerDefault: {
         cursor: 'pointer',
@@ -158,7 +156,10 @@ export default class Header extends Component {
                     <div style = { styles.headerItem }>
                         <div style = { styles.divider } />
                     </div>
-                    <div style = { styles.headerItem }>
+                    <div
+                        style = { Object.assign({}, styles.headerItem, { cursor: 'pointer' }) }
+                        onClick = { this.handleToggleUserMode }
+                    >
                         <div style = { styles.toggleGroup }>
                             <div style = { styles.toggleGroupItem }>
                                 CHILD
