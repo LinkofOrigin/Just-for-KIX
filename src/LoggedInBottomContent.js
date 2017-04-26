@@ -30,6 +30,7 @@ const styles = {
     },
     newListContStyle: {
         height: '0',
+        marginBottom: '20px',
         overflow: 'hidden',
     },
     titleFormStyle: {
@@ -42,10 +43,6 @@ const styles = {
         display: 'inline-block',
         marginRight: '20px',
         marginBottom: '10px',
-    },
-    titleSaveButtonStyle: {
-        position: 'relative',
-        top: '50%',
     },
 };
 
@@ -83,6 +80,12 @@ export default class LoggedInBottomContent extends Component {
                     this.refs.newListTitleRef.focus();
                 }
             });
+    };
+    
+    handleCancelTitleEdit = () => {
+        this.setState({
+            showNewList: false,
+        });
     };
 
     handleNewListTitleChange = (e) => {
@@ -136,9 +139,15 @@ export default class LoggedInBottomContent extends Component {
                         />
                         <br />
                         <RaisedButton
-                            style = { styles.titleSaveButtonStyle }
-                            label = 'Save'
+                            style = { { marginRight: '15px' } }
+                            label = 'Cancel'
                             onClick = { this.handleCancelTitleEdit }
+                        />
+                        <RaisedButton
+                            label = 'Save'
+                            labelColor = 'white'
+                            type = 'submit'
+                            overlayStyle = { { backgroundColor: '#0d0d96' } }
                         />
                     </form>
                 </div>

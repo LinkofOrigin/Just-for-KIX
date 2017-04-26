@@ -226,7 +226,7 @@ export default class GamesList extends Component {
                         <RaisedButton
                             label = 'Save'
                             labelColor = 'white'
-                            overlayStyle = { {backgroundColor: '#0d0d96'} }
+                            overlayStyle = { { backgroundColor: '#0d0d96' } }
                             type = 'submit'
                         />
                     </form>);
